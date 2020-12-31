@@ -23,7 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Bus\Bus.csproj" />
-    <ProjectReference Include="..\Entities\Entities.csproj" />
   </ItemGroup>
 
 
