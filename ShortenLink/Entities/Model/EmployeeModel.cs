@@ -22,8 +22,9 @@ namespace Entities.Model
         public Guid RoleId { get; set; }
         public RoleModel Role { get; set; }
 
-        [Required]
-        public string Name { get; set; }
+        public string FullName { get; set; }
+
+        public string  UserName { get; set; }
 
         public ICollection<LinkDataModel> LinkDatas { get; set; } = new List<LinkDataModel>();
 

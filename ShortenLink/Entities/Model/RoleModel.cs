@@ -13,6 +13,5 @@ namespace Entities.Model
         [Required]
         public string RoleName { get; set; }
 
-        public ICollection<EmployeeModel> Employees { get; set; } = new List<EmployeeModel>();
     }
 }
