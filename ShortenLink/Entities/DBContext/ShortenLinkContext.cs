@@ -70,6 +70,14 @@ namespace Entities.DBContext
             {
                 CreatedAt = new DateTime(),
                 EmployeeId = Guid.Parse("ffbed34c-4b39-11eb-ae93-0242ac130002"),
+                FullLink = "https://www.google.com",
+                ShortLink = "Google",
+                Id = Guid.Parse("a4a31ddf-d56a-4209-8030-d3a696edf8eb")
+            },
+            new LinkDataModel
+            {
+                CreatedAt = new DateTime(),
+                EmployeeId = Guid.Parse("ffbed34c-4b39-11eb-ae93-0242ac130002"),
                 FullLink = "https://www.uuidgenerator.net/version4",
                 ShortLink = "uuidgen4",
                 Id = Guid.Parse("11f7fba0-4b45-11eb-ae93-0242ac130002")
