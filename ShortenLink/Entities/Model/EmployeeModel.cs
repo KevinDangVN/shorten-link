@@ -24,7 +24,7 @@ namespace Entities.Model
 
         public string FullName { get; set; }
 
-        public string  UserName { get; set; }
+        public string UserName { get; set; }
 
         public ICollection<LinkDataModel> LinkDatas { get; set; } = new List<LinkDataModel>();
 

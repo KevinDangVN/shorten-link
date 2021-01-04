@@ -10,7 +10,9 @@ namespace Entities.Service
         IEnumerable<LinkDataModel> GetAllLink();
         IEnumerable<LinkDataModel> GetAllLinkByEmployeeId(Guid id);
         LinkDataModel GetLinkByLinkId(Guid id);
-        void AddLink(LinkDataModel link);
+        LinkDataModel GetLinkByShortLink(string shortLink);
+
+        void AddLink(Guid id, LinkDataModel link);
         void UpdateLink(LinkDataModel link);
         void DeleteLink(LinkDataModel link);
 
