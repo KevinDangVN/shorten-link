@@ -63,6 +63,7 @@ namespace ShortenLinkApi.Controllers
                 return NotFound();
 
             var linkFromRepo = _shortenLinkRepository.GetAllLinkByEmployeeId(empId);
+
             return Ok(_mapper.Map<IEnumerable<LinkDataDTO>>(linkFromRepo));
         }
     }

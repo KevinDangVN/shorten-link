@@ -71,13 +71,13 @@ namespace Entities.Service
             return _context.LinkDatas.Where(linkData => linkData.ShortLink == shortLink).FirstOrDefault();
         }
 
-        public bool EmpExists(Guid LinkId)
+        public bool EmpWithLinkExists(Guid empId)
         {
-            if (LinkId == Guid.Empty)
+            if (empId == Guid.Empty)
             {
-                throw new ArgumentNullException(nameof(LinkId));
+                throw new ArgumentNullException(nameof(empId));
             }
-            return _context.LinkDatas.Any(linkData => linkData.EmployeeId == LinkId);
+            return _context.LinkDatas.Any(linkData => linkData.EmployeeId == empId);
         }
 
         public bool Save()
