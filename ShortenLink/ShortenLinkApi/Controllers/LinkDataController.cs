@@ -59,7 +59,7 @@ namespace ShortenLinkApi.Controllers
         [HttpGet("link/emp/{empId}")]
         public ActionResult<IEnumerable<LinkDataDTO>> GetLinkByEmpId(Guid empId)
         {
-            if (!_shortenLinkRepository.EmpExists(empId))
+            if (!_shortenLinkRepository.EmpWithLinkExists(empId))
                 return NotFound();
 
             var linkFromRepo = _shortenLinkRepository.GetAllLinkByEmployeeId(empId);
