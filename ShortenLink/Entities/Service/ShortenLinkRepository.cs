@@ -16,17 +16,17 @@ namespace Entities.Service
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public void AddLink(Guid id, LinkDataModel link)
+        public void AddLink(Guid empId, LinkDataModel link)
         {
-            if (id == Guid.Empty)
+            if (empId == Guid.Empty)
             {
-                throw new ArgumentNullException(nameof(id));
+                throw new ArgumentNullException(nameof(empId));
             }
             if (link == null)
             {
                 throw new ArgumentNullException(nameof(link));
             }
-            link.Id = id;
+            link.EmployeeId = empId;
             _context.LinkDatas.Add(link);
         }
 
@@ -71,6 +71,21 @@ namespace Entities.Service
             return _context.LinkDatas.Where(linkData => linkData.ShortLink == shortLink).FirstOrDefault();
         }
 
+        public LinkDataModel GetLinkByEmpIdLinkId(Guid empId, Guid linkId)
+        {
+            if (empId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(empId));
+            }
+            if (linkId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(linkId));
+            }
+
+            return _context.LinkDatas.Where(linkData => linkData.EmployeeId == empId && linkData.Id == linkId).FirstOrDefault();
+
+        }
+
         public bool EmpWithLinkExists(Guid empId)
         {
             if (empId == Guid.Empty)
@@ -78,6 +93,15 @@ namespace Entities.Service
                 throw new ArgumentNullException(nameof(empId));
             }
             return _context.LinkDatas.Any(linkData => linkData.EmployeeId == empId);
+        }
+
+        public bool LinkExists(Guid linkId)
+        {
+            if (linkId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(linkId));
+            }
+            return _context.LinkDatas.Any(linkData => linkData.Id == linkId);
         }
 
         public bool Save()
@@ -89,5 +113,7 @@ namespace Entities.Service
         {
             throw new NotImplementedException();
         }
+
+       
     }
 }

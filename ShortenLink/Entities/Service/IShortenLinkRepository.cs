@@ -11,12 +11,14 @@ namespace Entities.Service
         IEnumerable<LinkDataModel> GetAllLinkByEmployeeId(Guid id);
         LinkDataModel GetLinkByLinkId(Guid id);
         LinkDataModel GetLinkByShortLink(string shortLink);
+        LinkDataModel GetLinkByEmpIdLinkId(Guid empId, Guid linkId);
 
         void AddLink(Guid id, LinkDataModel link);
         void UpdateLink(LinkDataModel link);
         void DeleteLink(LinkDataModel link);
 
         bool EmpWithLinkExists(Guid empId);
+        bool LinkExists(Guid linkId);
         bool Save();
     }
 }

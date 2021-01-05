@@ -10,6 +10,7 @@ namespace Entities.ProfileMapper
         public LinkProfile()
         {
             CreateMap<Model.LinkDataModel, DTO.LinkDataDTO>().ReverseMap();
+            CreateMap<DTO.LinkCreatingDTO, Model.LinkDataModel>();
         }
     }
 }
