@@ -9,5 +9,6 @@ namespace Entities.DTO
         public Guid Id { get; set; }
         public string FullLink { get; set; }
         public string ShortLink { get; set; }
+        public int Count { get; set; }
     }
 }

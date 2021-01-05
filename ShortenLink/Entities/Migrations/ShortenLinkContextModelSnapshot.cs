@@ -54,7 +54,7 @@ namespace Entities.Migrations
                             Id = new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"),
                             Email = "mail_1@mail.com",
                             FullName = "Nguyen Van A",
-                            Password = "AQAAAAEAACcQAAAAEFpwdfiXgpRNNXTstwjvL26HP2SeavaGX2hXDV16TUaMoMNk4DDRwhqnj9mJzERfFQ==",
+                            Password = "AQAAAAEAACcQAAAAEMgx+n/MIyy/JV2Zc0eKsPIUx6wp1K+DQOLPowCESO2RNpQ3AKdYoe1L7z478MMVvw==",
                             RoleId = new Guid("6f6c4608-4b39-11eb-ae93-0242ac130002"),
                             UserName = "user"
                         },
@@ -63,7 +63,7 @@ namespace Entities.Migrations
                             Id = new Guid("ad7e7c58-4b3a-11eb-ae93-0242ac130002"),
                             Email = "mail_2@mail.com",
                             FullName = "Nguyen Van N",
-                            Password = "AQAAAAEAACcQAAAAEPcPMtALuM8X4iqdr36bOnatKe4K9x9cbrKJk927J59gUd5Wsi8tjCjVesqEdU3PjA==",
+                            Password = "AQAAAAEAACcQAAAAEP7z3pyKo4Jczkv3Ki+QsDOk/etv81vjUOo4YPQC/7YdIwoNMatOfHl7YDc5aIlS3Q==",
                             RoleId = new Guid("aeeccc6d-e50f-43d9-92cf-e5b89acb8c83"),
                             UserName = "admin"
                         });
@@ -74,6 +74,9 @@ namespace Entities.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -99,6 +102,7 @@ namespace Entities.Migrations
                         new
                         {
                             Id = new Guid("867e6316-4b44-11eb-ae93-0242ac130002"),
+                            Count = 0,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmployeeId = new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"),
                             FullLink = "https://www.google.com",
@@ -107,7 +111,8 @@ namespace Entities.Migrations
                         new
                         {
                             Id = new Guid("a63771fc-4b44-11eb-ae93-0242ac130002"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Count = 0,
+                            CreatedAt = new DateTime(2021, 1, 5, 10, 44, 44, 4, DateTimeKind.Local).AddTicks(3435),
                             EmployeeId = new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"),
                             FullLink = "https://www.uuidgenerator.net/version1",
                             ShortLink = "uuidgen"
@@ -115,15 +120,17 @@ namespace Entities.Migrations
                         new
                         {
                             Id = new Guid("a4a31ddf-d56a-4209-8030-d3a696edf8eb"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Count = 0,
+                            CreatedAt = new DateTime(2021, 1, 5, 10, 44, 44, 5, DateTimeKind.Local).AddTicks(739),
                             EmployeeId = new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"),
-                            FullLink = "https://www.google.com",
-                            ShortLink = "Google"
+                            FullLink = "https://thanhnien.vn/",
+                            ShortLink = "thanhnien"
                         },
                         new
                         {
                             Id = new Guid("11f7fba0-4b45-11eb-ae93-0242ac130002"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Count = 0,
+                            CreatedAt = new DateTime(2021, 1, 5, 10, 44, 44, 5, DateTimeKind.Local).AddTicks(756),
                             EmployeeId = new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"),
                             FullLink = "https://www.uuidgenerator.net/version4",
                             ShortLink = "uuidgen4"

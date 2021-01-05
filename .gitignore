@@ -13,6 +13,10 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+./ShortenLink/Entities/Migrations/*.*
+./ShortenLink/Entities/Migrations/
+./ShortenLink/ShortenLinkApi/appsettings.json
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/

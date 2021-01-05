@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Entities.Migrations
 {
-    public partial class Initial : Migration
+    public partial class init_v1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,6 +49,7 @@ namespace Entities.Migrations
                     FullLink = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ShortLink = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Count = table.Column<int>(type: "int", nullable: false),
                     EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -75,27 +76,23 @@ namespace Entities.Migrations
             migrationBuilder.InsertData(
                 table: "Employees",
                 columns: new[] { "Id", "Email", "FullName", "Password", "RoleId", "UserName" },
-                values: new object[] { new Guid("ad7e7c58-4b3a-11eb-ae93-0242ac130002"), "mail_2@mail.com", "Nguyen Van N", "AQAAAAEAACcQAAAAEAQHjBEpm9tKrt5Yw+zB8zrnLY95exiqUOdpHJNm/ILfP3UAJEAwojYEpS+qyjWVWA==", new Guid("aeeccc6d-e50f-43d9-92cf-e5b89acb8c83"), "admin" });
+                values: new object[] { new Guid("ad7e7c58-4b3a-11eb-ae93-0242ac130002"), "mail_2@mail.com", "Nguyen Van N", "AQAAAAEAACcQAAAAEP7z3pyKo4Jczkv3Ki+QsDOk/etv81vjUOo4YPQC/7YdIwoNMatOfHl7YDc5aIlS3Q==", new Guid("aeeccc6d-e50f-43d9-92cf-e5b89acb8c83"), "admin" });
 
             migrationBuilder.InsertData(
                 table: "Employees",
                 columns: new[] { "Id", "Email", "FullName", "Password", "RoleId", "UserName" },
-                values: new object[] { new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"), "mail_1@mail.com", "Nguyen Van A", "AQAAAAEAACcQAAAAECMlJV52Aw8+h6TCbnioD7WiBDsf6wYRKp7QP2InaVJcSMdxqfzHJ3Lv90PxdNO7hA==", new Guid("6f6c4608-4b39-11eb-ae93-0242ac130002"), "user" });
+                values: new object[] { new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"), "mail_1@mail.com", "Nguyen Van A", "AQAAAAEAACcQAAAAEMgx+n/MIyy/JV2Zc0eKsPIUx6wp1K+DQOLPowCESO2RNpQ3AKdYoe1L7z478MMVvw==", new Guid("6f6c4608-4b39-11eb-ae93-0242ac130002"), "user" });
 
             migrationBuilder.InsertData(
                 table: "LinkDatas",
-                columns: new[] { "Id", "CreatedAt", "EmployeeId", "FullLink", "ShortLink" },
-                values: new object[] { new Guid("867e6316-4b44-11eb-ae93-0242ac130002"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"), "https://www.google.com", "google" });
-
-            migrationBuilder.InsertData(
-                table: "LinkDatas",
-                columns: new[] { "Id", "CreatedAt", "EmployeeId", "FullLink", "ShortLink" },
-                values: new object[] { new Guid("a63771fc-4b44-11eb-ae93-0242ac130002"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"), "https://www.uuidgenerator.net/version1", "uuidgen" });
-
-            migrationBuilder.InsertData(
-                table: "LinkDatas",
-                columns: new[] { "Id", "CreatedAt", "EmployeeId", "FullLink", "ShortLink" },
-                values: new object[] { new Guid("11f7fba0-4b45-11eb-ae93-0242ac130002"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"), "https://www.uuidgenerator.net/version4", "uuidgen4" });
+                columns: new[] { "Id", "Count", "CreatedAt", "EmployeeId", "FullLink", "ShortLink" },
+                values: new object[,]
+                {
+                    { new Guid("867e6316-4b44-11eb-ae93-0242ac130002"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"), "https://www.google.com", "google" },
+                    { new Guid("a63771fc-4b44-11eb-ae93-0242ac130002"), 0, new DateTime(2021, 1, 5, 10, 44, 44, 4, DateTimeKind.Local).AddTicks(3435), new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"), "https://www.uuidgenerator.net/version1", "uuidgen" },
+                    { new Guid("a4a31ddf-d56a-4209-8030-d3a696edf8eb"), 0, new DateTime(2021, 1, 5, 10, 44, 44, 5, DateTimeKind.Local).AddTicks(739), new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"), "https://thanhnien.vn/", "thanhnien" },
+                    { new Guid("11f7fba0-4b45-11eb-ae93-0242ac130002"), 0, new DateTime(2021, 1, 5, 10, 44, 44, 5, DateTimeKind.Local).AddTicks(756), new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"), "https://www.uuidgenerator.net/version4", "uuidgen4" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_RoleId",

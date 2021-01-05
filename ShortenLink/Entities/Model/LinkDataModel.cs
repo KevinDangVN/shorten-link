@@ -19,6 +19,8 @@ namespace Entities.Model
 
         public DateTime CreatedAt { get; set; }
 
+        public int Count { get; set; }
+
         // Add One-To-Many Relation
         [ForeignKey("EmployeeId")]
         public EmployeeModel Employee { get; set; }
