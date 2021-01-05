@@ -41,7 +41,7 @@ namespace ShortenLinkApi.Controllers
             _employeeRepository.Save();
 
             var empToResponse = _mapper.Map<EmployeeDTO>(empEntity);
-            return CreatedAtRoute("GetEmpById", new { empId = empToResponse.Id },empToResponse);
+            return CreatedAtRoute("GetEmpById", new { empId = empToResponse.Id }, empToResponse);
         }
     }
 }
