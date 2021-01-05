@@ -35,7 +35,10 @@ namespace ShortenLinkApi
                 setupAction.ReturnHttpNotAcceptable = true;
             }).AddXmlDataContractSerializerFormatters();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddScoped<IShortenLinkRepository, ShortenLinkRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
             services.AddDbContext<ShortenLinkContext>(option =>
             {
                 option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));

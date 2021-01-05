@@ -66,5 +66,7 @@ namespace ShortenLinkApi.Controllers
 
             return Ok(_mapper.Map<IEnumerable<LinkDataDTO>>(linkFromRepo));
         }
+
+
     }
 }

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Entities.Service
 {
-    class EmployeeRepository : IEmployeeRepository
+    public class EmployeeRepository : IEmployeeRepository
     {
         private readonly ShortenLinkContext _context;
 
@@ -16,17 +16,14 @@ namespace Entities.Service
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public void AddEmployee(Guid id, EmployeeModel emp)
+        public void AddEmployee(Guid RoleId, EmployeeModel emp)
         {
-            if (id == Guid.Empty)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
             if (emp == null)
-            {
                 throw new ArgumentNullException(nameof(emp));
+            if (RoleId == Guid.Empty)
+            {
+                emp.RoleId = Guid.Parse("6f6c4608-4b39-11eb-ae93-0242ac130002");
             }
-            emp.Id = id;
             _context.Employees.Add(emp);
         }
 
@@ -59,6 +56,7 @@ namespace Entities.Service
             {
                 throw new ArgumentNullException(nameof(id));
             }
+
             return _context.Employees.Where(emp => emp.Id == id).FirstOrDefault();
         }
 

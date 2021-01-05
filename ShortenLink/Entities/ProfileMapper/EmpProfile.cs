@@ -10,6 +10,7 @@ namespace Entities.ProfileMapper
         public EmpProfile()
         {
             CreateMap<Model.EmployeeModel, DTO.EmployeeDTO>().ReverseMap();
+            CreateMap<DTO.EmployeeCreatingDTO, Model.EmployeeModel>();
         }
     }
 }
