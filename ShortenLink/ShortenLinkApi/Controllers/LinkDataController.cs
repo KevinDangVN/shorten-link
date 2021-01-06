@@ -106,5 +106,51 @@ namespace ShortenLinkApi.Controllers
             return CreatedAtRoute("GetLinkByEmpIdLinkId", new { empId, linkId = linkToResponse.Id }, linkToResponse);
         }
 
+        [HttpPatch("link/emp/{empId}/{linkId}")]
+        public ActionResult UpdateLinkByEmpIdLinkId(Guid empId, Guid linkId, [FromBody] LinkUpdateDTO link)
+        {
+            if (!_employeeRepository.EmpExists(empId))
+                return NotFound();
+
+            var linkFromRepo = _shortenLinkRepository.GetLinkByEmpIdLinkId(empId, linkId);
+
+            var existLink = _shortenLinkRepository.GetLinkByShortLink(link.ShortLink);
+
+            if (existLink != null)
+            {
+                return BadRequest("Slug exists!");
+            }
+
+            if (linkFromRepo == null)
+                return NotFound();
+
+            if (linkFromRepo.EmployeeId != empId)
+                return NotFound();
+
+            _mapper.Map(link, linkFromRepo);
+            _shortenLinkRepository.UpdateLink(linkFromRepo);
+            _shortenLinkRepository.Save();
+
+            return NoContent();
+        }
+
+        [HttpPatch("view/{shortLink}")]
+        public ActionResult IncreaseView(string shortLink)
+        {
+            var linkFromRepo = _shortenLinkRepository.GetLinkByShortLink(shortLink);
+            if (linkFromRepo == null)
+                return NotFound();
+            var link = new LinkForViewUpdate()
+            {
+                Count = linkFromRepo.Count + 1
+            };
+
+            _mapper.Map(link, linkFromRepo);
+            _shortenLinkRepository.UpdateLink(linkFromRepo);
+            _shortenLinkRepository.Save();
+            return NoContent();
+        }
+
+
     }
 }

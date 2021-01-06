@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Entities.DTO
 {
-    public class LinkCreatingDTO
+    public class LinkUpdateDTO
     {
         [Required]
         [MinLength(1)]
@@ -14,12 +14,5 @@ namespace Entities.DTO
         [Required]
         [MinLength(1)]
         public string ShortLink { get; set; }
-
-        public DateTime CreatedAt { get; set; }
-
-        public int Count { get; set; }
-
-        [Required]
-        public Guid EmployeeId { get; set; }
     }
 }

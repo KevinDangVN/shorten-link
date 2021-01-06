@@ -111,7 +111,7 @@ namespace Entities.Service
 
         public void UpdateLink(LinkDataModel link)
         {
-            throw new NotImplementedException();
+            
         }
 
        
