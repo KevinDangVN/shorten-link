@@ -94,7 +94,7 @@ namespace ShortenLinkApi.Controllers
 
             if (existLink != null)
             {
-                return BadRequest("Slug exists!");
+                return NotFound("Slug exists!");
             }
             var linkEntity = _mapper.Map<LinkDataModel>(link);
             linkEntity.Count = 0;
@@ -118,7 +118,7 @@ namespace ShortenLinkApi.Controllers
 
             if (existLink != null)
             {
-                return BadRequest("Slug exists!");
+                return NotFound("Slug exists!");
             }
 
             if (linkFromRepo == null)
