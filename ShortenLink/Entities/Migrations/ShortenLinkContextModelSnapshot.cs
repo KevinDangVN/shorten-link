@@ -40,6 +40,7 @@ namespace Entities.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -54,7 +55,7 @@ namespace Entities.Migrations
                             Id = new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"),
                             Email = "mail_1@mail.com",
                             FullName = "Nguyen Van A",
-                            Password = "AQAAAAEAACcQAAAAELdCgviVW1XEGL0JNdu9iauVy8M6ucs2YDvgeJFlSLih5DpjVwE2xyHbJjOBd73lDg==",
+                            Password = "AQAAAAEAACcQAAAAELz8PCCJajPuMQZ8zYPwu5Ag8uKzBmYW2qpRoN/K087KdiQlVSRtswMLq74N8lzS0g==",
                             RoleId = new Guid("6f6c4608-4b39-11eb-ae93-0242ac130002"),
                             UserName = "user"
                         },
@@ -63,7 +64,7 @@ namespace Entities.Migrations
                             Id = new Guid("ad7e7c58-4b3a-11eb-ae93-0242ac130002"),
                             Email = "mail_2@mail.com",
                             FullName = "Nguyen Van N",
-                            Password = "AQAAAAEAACcQAAAAENAsF8hPK6O9qalKOdQ5AuO/5QHxTXous3eFIsgjOqxxLmtrLDDD6arIs4hlGRjLdA==",
+                            Password = "AQAAAAEAACcQAAAAEC55fNw4LoqbELpV4SOXrp5swx842lDLeyR9iYbice9wJNPUsuN6Yu78ESwx3MnjWQ==",
                             RoleId = new Guid("aeeccc6d-e50f-43d9-92cf-e5b89acb8c83"),
                             UserName = "admin"
                         });
@@ -103,7 +104,7 @@ namespace Entities.Migrations
                         {
                             Id = new Guid("867e6316-4b44-11eb-ae93-0242ac130002"),
                             Count = 0,
-                            CreatedAt = new DateTime(2021, 1, 5, 10, 51, 40, 383, DateTimeKind.Local).AddTicks(5482),
+                            CreatedAt = new DateTime(2021, 1, 6, 18, 57, 45, 782, DateTimeKind.Local).AddTicks(6654),
                             EmployeeId = new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"),
                             FullLink = "https://www.google.com",
                             ShortLink = "google"
@@ -112,7 +113,7 @@ namespace Entities.Migrations
                         {
                             Id = new Guid("a63771fc-4b44-11eb-ae93-0242ac130002"),
                             Count = 0,
-                            CreatedAt = new DateTime(2021, 1, 5, 10, 51, 40, 384, DateTimeKind.Local).AddTicks(5419),
+                            CreatedAt = new DateTime(2021, 1, 6, 18, 57, 45, 783, DateTimeKind.Local).AddTicks(493),
                             EmployeeId = new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"),
                             FullLink = "https://www.uuidgenerator.net/version1",
                             ShortLink = "uuidgen"
@@ -121,7 +122,7 @@ namespace Entities.Migrations
                         {
                             Id = new Guid("a4a31ddf-d56a-4209-8030-d3a696edf8eb"),
                             Count = 0,
-                            CreatedAt = new DateTime(2021, 1, 5, 10, 51, 40, 384, DateTimeKind.Local).AddTicks(5504),
+                            CreatedAt = new DateTime(2021, 1, 6, 18, 57, 45, 783, DateTimeKind.Local).AddTicks(768),
                             EmployeeId = new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"),
                             FullLink = "https://thanhnien.vn/",
                             ShortLink = "thanhnien"
@@ -130,7 +131,7 @@ namespace Entities.Migrations
                         {
                             Id = new Guid("11f7fba0-4b45-11eb-ae93-0242ac130002"),
                             Count = 0,
-                            CreatedAt = new DateTime(2021, 1, 5, 10, 51, 40, 384, DateTimeKind.Local).AddTicks(5512),
+                            CreatedAt = new DateTime(2021, 1, 6, 18, 57, 45, 783, DateTimeKind.Local).AddTicks(775),
                             EmployeeId = new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"),
                             FullLink = "https://www.uuidgenerator.net/version4",
                             ShortLink = "uuidgen4"

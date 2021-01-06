@@ -2,6 +2,7 @@
 using Entities.DTO;
 using Entities.Model;
 using Entities.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace ShortenLinkApi.Controllers
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
+        [Authorize]
         [HttpGet("alllinks")]
         public ActionResult<IEnumerable<LinkDataDTO>> GetAllLink()
         {
@@ -40,6 +42,8 @@ namespace ShortenLinkApi.Controllers
             //        ShortLink = link.ShortLink
             //    });
             //}
+
+            var claims = HttpContext.User.Claims;
 
             return Ok(_mapper.Map<IEnumerable<LinkDataDTO>>(linkFromRepo));
         }
