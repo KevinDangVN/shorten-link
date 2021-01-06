@@ -151,6 +151,20 @@ namespace ShortenLinkApi.Controllers
             return NoContent();
         }
 
+        [HttpDelete("link/emp/{empId}/{linkId}")]
+        public ActionResult DeleteLinkWithEmpIdLinkId(Guid empId, Guid linkId)
+        {
+            if (!_employeeRepository.EmpExists(empId))
+                return NotFound();
 
+            var linkFromRepo = _shortenLinkRepository.GetLinkByEmpIdLinkId(empId, linkId);
+            if (linkFromRepo == null)
+                return NotFound();
+
+            _shortenLinkRepository.DeleteLink(linkFromRepo);
+            _shortenLinkRepository.Save();
+
+            return NoContent();
+        }
     }
 }

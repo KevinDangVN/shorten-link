@@ -54,5 +54,18 @@ namespace ShortenLinkApi.Controllers
             var empToResponse = _mapper.Map<EmployeeDTO>(empEntity);
             return CreatedAtRoute("GetEmpById", new { empId = empToResponse.Id }, empToResponse);
         }
+
+        [HttpDelete("{empId}")]
+        public ActionResult DeleteEmpById(Guid empId)
+        {
+            var empFromRepo = _employeeRepository.GetEmployeeById(empId);
+            if (empFromRepo == null)
+                return NotFound();
+
+            _employeeRepository.DeleteEmployee(empFromRepo);
+            _employeeRepository.Save();
+
+            return NoContent();
+        }
     }
 }
