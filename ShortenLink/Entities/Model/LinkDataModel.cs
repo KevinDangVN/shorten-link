@@ -12,9 +12,11 @@ namespace Entities.Model
         public Guid Id { get; set; }
 
         [Required]
+        [MinLength(1)]
         public string FullLink { get; set; }
 
         [Required]
+        [MinLength(1)]
         public string ShortLink { get; set; }
 
         public DateTime CreatedAt { get; set; }

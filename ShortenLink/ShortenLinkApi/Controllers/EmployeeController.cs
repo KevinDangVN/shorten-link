@@ -35,6 +35,17 @@ namespace ShortenLinkApi.Controllers
         [HttpPost]
         public ActionResult<EmployeeDTO> CreateEmployee([FromBody] EmployeeCreatingDTO emp)
         {
+            if (emp.Email == null)
+            {
+                return BadRequest("Email not found");
+            }
+            var existEmp = _employeeRepository.GetEmployeeByEmail(emp.Email);
+
+            if (existEmp != null)
+            {
+                return BadRequest("Email exists!");
+            }
+
             var empEntity = _mapper.Map<EmployeeModel>(emp);
             empEntity.Password = new PasswordHasher<object>().HashPassword(null, emp.Password);
             _employeeRepository.AddEmployee(Guid.Empty, empEntity);

@@ -90,6 +90,12 @@ namespace ShortenLinkApi.Controllers
         {
             if (!_employeeRepository.EmpExists(empId))
                 return NotFound();
+            var existLink = _shortenLinkRepository.GetLinkByShortLink(link.ShortLink);
+
+            if (existLink != null)
+            {
+                return BadRequest("Slug exists!");
+            }
             var linkEntity = _mapper.Map<LinkDataModel>(link);
             linkEntity.Count = 0;
 

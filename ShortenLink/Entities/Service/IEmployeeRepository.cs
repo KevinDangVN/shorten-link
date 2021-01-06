@@ -9,6 +9,8 @@ namespace Entities.Service
     {
         IEnumerable<EmployeeModel> GetAllEmployee();
         EmployeeModel GetEmployeeById(Guid id);
+        EmployeeModel GetEmployeeByEmail(string email);
+
 
         void AddEmployee(Guid RoleId, EmployeeModel emp);
         void UpdateEmployee(EmployeeModel emp);

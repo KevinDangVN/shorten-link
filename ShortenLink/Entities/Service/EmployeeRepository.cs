@@ -50,6 +50,16 @@ namespace Entities.Service
             return _context.Employees.OrderBy(emp => emp.UserName).ToList();
         }
 
+        public EmployeeModel GetEmployeeByEmail(string email)
+        {
+            if (email == null)
+            {
+                throw new ArgumentNullException(nameof(email));
+            }
+
+            return _context.Employees.Where(emp => emp.Email == email).FirstOrDefault();
+        }
+
         public EmployeeModel GetEmployeeById(Guid id)
         {
             if (id == Guid.Empty)
