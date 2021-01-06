@@ -37,13 +37,13 @@ namespace ShortenLinkApi.Controllers
         {
             if (emp.Email == null)
             {
-                return NotFound("Email not found");
+                return BadRequest("Email not found");
             }
             var existEmp = _employeeRepository.GetEmployeeByEmail(emp.Email);
 
             if (existEmp != null)
             {
-                return NotFound("Email exists!");
+                return BadRequest("Email exists!");
             }
 
             var empEntity = _mapper.Map<EmployeeModel>(emp);
