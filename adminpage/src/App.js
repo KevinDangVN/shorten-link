@@ -25,7 +25,7 @@ const App = () => {
       <PrivateRoute
         path="/"
         component={Welcome}
-        roles={[roles.FULLTIME, roles.DIRECTOR]}
+        roles={[roles.ADMIN, roles.EMPLOYEE]}
       />
     </Switch>
   );

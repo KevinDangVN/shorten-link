@@ -6,16 +6,7 @@ const axiosClient = axios.create({
 });
 
 const refreshAccessToken = async (userData) => {
-  try {
-    const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}/oisp/auth/refreshtoken`,
-      { userData: userData }
-    );
-    return response.data.acToken;
-  } catch (error) {
-    return false;
-  }
-  // return false;
+  return false;
 };
 
 axiosClient.interceptors.request.use(

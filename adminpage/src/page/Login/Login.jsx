@@ -30,7 +30,7 @@ const LoginPage = (props) => {
           </Col>
           <Col md={14} xs={24}>
             <Row justify="center" className="login--header">
-              Sign In With
+              Sign In
             </Row>
 
             <Row justify="center" style={{ marginTop: "2rem" }}>
