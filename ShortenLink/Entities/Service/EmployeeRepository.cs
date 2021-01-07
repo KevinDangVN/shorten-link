@@ -42,7 +42,7 @@ namespace Entities.Service
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
+        }        
 
         public void DeleteEmployee(EmployeeModel emp)
         {

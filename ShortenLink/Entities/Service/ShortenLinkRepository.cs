@@ -30,6 +30,11 @@ namespace Entities.Service
             _context.LinkDatas.Add(link);
         }
 
+        public int CountAllClick()
+        {
+            return _context.LinkDatas.Sum(c => c.Count);
+        }
+
         public void DeleteLink(LinkDataModel link)
         {
             if (link == null)

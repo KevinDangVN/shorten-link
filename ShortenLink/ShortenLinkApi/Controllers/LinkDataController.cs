@@ -47,6 +47,7 @@ namespace ShortenLinkApi.Controllers
             var test = claims.Where(c => c.Type == "Role").FirstOrDefault().Value;
             if (test == "Admin")
             {
+                var count = _shortenLinkRepository.CountAllClick();
                 return Ok(_mapper.Map<IEnumerable<LinkDataDTO>>(linkFromRepo));
             }
             return Unauthorized();
