@@ -1,36 +1,36 @@
-import logo from "./logo.svg";
-import "./App.css";
-import axios from "axios";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-const check = async () => {
-  const response = await axios.get(
-    "http://localhost:5000/api/linkdata/alllinks"
+import PrivateRoute from "./compoment/privateRoute/PrivateRoute";
+import localStorageService from "./helper/localStorage/localStorageService";
+import LoginPage from "./page/Login/Login";
+import Welcome from "./page/welcome/Welcome.jsx";
+import roles from "./helper/config/Roles";
+import * as actionCreator from "./store/action/index";
+
+const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (localStorageService.getAccessToken === undefined) {
+      localStorageService.clearAll();
+    }
+    dispatch(actionCreator.onTryAutoLogin());
+  }, [dispatch]);
+
+  const routes = (
+    <Switch>
+      <Route path="/login" component={LoginPage} />
+      <PrivateRoute
+        path="/"
+        component={Welcome}
+        roles={[roles.FULLTIME, roles.DIRECTOR]}
+      />
+    </Switch>
   );
 
-  console.log(response);
+  return <BrowserRouter>{routes}</BrowserRouter>;
 };
-
-check();
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
 
 export default App;
