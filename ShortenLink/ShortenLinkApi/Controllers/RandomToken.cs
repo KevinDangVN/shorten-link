@@ -9,9 +9,7 @@ using System.Threading.Tasks;
 
 namespace ShortenLinkApi.Controllers
 {
-    [Route("api/random")]
-    [ApiController]
-    public class RandomToken : ControllerBase
+    public class RandomToken
     {
         private IConfiguration _config;
 
@@ -20,7 +18,6 @@ namespace ShortenLinkApi.Controllers
             _config = config;
         }
 
-        [HttpGet]
         public string GetRandomToken()
         {
             var jwt = new JWTService(_config);

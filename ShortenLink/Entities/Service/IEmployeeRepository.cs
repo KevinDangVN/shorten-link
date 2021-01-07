@@ -10,6 +10,7 @@ namespace Entities.Service
         IEnumerable<EmployeeModel> GetAllEmployee();
         EmployeeModel GetEmployeeById(Guid id);
         EmployeeModel GetEmployeeByEmail(string email);
+        EmployeeModel GetEmployeeByUserName(string userName);
 
 
         void AddEmployee(Guid RoleId, EmployeeModel emp);

@@ -70,6 +70,16 @@ namespace Entities.Service
             return _context.Employees.Where(emp => emp.Id == id).FirstOrDefault();
         }
 
+        public EmployeeModel GetEmployeeByUserName(string userName)
+        {
+            if (userName == null)
+            {
+                throw new ArgumentNullException(nameof(userName));
+            }
+
+            return _context.Employees.Where(emp => emp.UserName == userName).FirstOrDefault();
+        }
+
         public bool Save()
         {
             return (_context.SaveChanges() >= 0);
