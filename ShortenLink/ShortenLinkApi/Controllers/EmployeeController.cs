@@ -22,7 +22,7 @@ namespace ShortenLinkApi.Controllers
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        [HttpGet("{empId}", Name = "GetEmpById")]
+        [HttpGet("view/{empId}", Name = "GetEmpById")]
         public IActionResult GetEmpById(Guid empId)
         {
             var empFromRepo = _employeeRepository.GetEmployeeById(empId);
@@ -66,6 +66,12 @@ namespace ShortenLinkApi.Controllers
             _employeeRepository.Save();
 
             return NoContent();
+        }
+
+        [HttpPost("auth")]
+        public ActionResult Login([FromBody] AuthRequestModel auth)
+        {
+
         }
     }
 }
