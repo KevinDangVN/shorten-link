@@ -1,5 +1,6 @@
 ﻿using Entities.DBContext;
 using Entities.Model;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,22 @@ namespace Entities.Service
                 emp.RoleId = Guid.Parse("6f6c4608-4b39-11eb-ae93-0242ac130002");
             }
             _context.Employees.Add(emp);
+        }
+
+        public bool ComparePassword(string hashedPassword, string curPassword)
+        {
+            var passwordVerificationResult = new PasswordHasher<object>().VerifyHashedPassword(null, hashedPassword, curPassword);
+            switch (passwordVerificationResult)
+            {
+                case PasswordVerificationResult.Failed:
+                    return false;
+
+                case PasswordVerificationResult.Success:
+                    return true;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         public void DeleteEmployee(EmployeeModel emp)

@@ -71,7 +71,20 @@ namespace ShortenLinkApi.Controllers
         [HttpPost("auth")]
         public ActionResult Login([FromBody] AuthRequestModel auth)
         {
+            if (auth.Username == null || auth.Password == null)
+            {
+                return BadRequest();
+            }
 
+            var empFromRepo = _employeeRepository.GetEmployeeByUserName(auth.Username);
+            if (empFromRepo != null)
+            {
+                if (_employeeRepository.ComparePassword(empFromRepo.Password, auth.Password))
+                {
+                    return Ok("Test okie");
+                }
+            }
+            return Unauthorized();
         }
     }
 }

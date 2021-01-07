@@ -18,6 +18,7 @@ namespace Entities.Service
         void DeleteEmployee(EmployeeModel link);
 
         bool EmpExists(Guid id);
+        bool ComparePassword(string hashedPassword, string curPassword);
         bool Save();
     }
 }
