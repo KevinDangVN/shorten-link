@@ -15,6 +15,7 @@ namespace Entities.DBContext
 
         public DbSet<EmployeeModel> Employees { get; set; }
         public DbSet<LinkDataModel> LinkDatas { get; set; }
+        public DbSet<RoleModel> RoleModels { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

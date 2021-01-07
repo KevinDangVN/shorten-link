@@ -18,11 +18,11 @@ namespace ShortenLinkApi.Controllers
             _config = config;
         }
 
-        public string GetRandomToken()
-        {
-            var jwt = new JWTService(_config);
-            var token = jwt.GenerateSecurityToken("fake@email.com", "test");
-            return token;
-        }
+        //public string GetRandomToken()
+        //{
+        //    //var jwt = new JWTService(_config);
+        //    //var token = jwt.GenerateSecurityToken("fake@email.com", "test");
+        //    //return token;
+        //}
     }
 }

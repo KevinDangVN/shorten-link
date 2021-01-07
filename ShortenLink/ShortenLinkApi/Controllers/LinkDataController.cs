@@ -44,8 +44,12 @@ namespace ShortenLinkApi.Controllers
             //}
 
             var claims = HttpContext.User.Claims;
-
-            return Ok(_mapper.Map<IEnumerable<LinkDataDTO>>(linkFromRepo));
+            var test = claims.Where(c => c.Type == "Role").FirstOrDefault().Value;
+            if (test == "Admin")
+            {
+                return Ok(_mapper.Map<IEnumerable<LinkDataDTO>>(linkFromRepo));
+            }
+            return Unauthorized();
         }
 
         [HttpGet("link/short/{link}")]
@@ -63,17 +67,25 @@ namespace ShortenLinkApi.Controllers
             return Ok(linkResult);
         }
 
+        [Authorize]
         [HttpGet("link/emp/{empId}", Name = "GetAllLinkByEmpId")]
         public ActionResult<IEnumerable<LinkDataDTO>> GetAllLinkByEmpId(Guid empId)
         {
             if (!_shortenLinkRepository.EmpWithLinkExists(empId))
                 return NotFound();
 
+            var claims = HttpContext.User.Claims;
+            var test = claims.Where(c => c.Type == "EmpId").FirstOrDefault().Value;
+
+            if (empId != Guid.Parse(test))
+                return Unauthorized();
+
             var linkFromRepo = _shortenLinkRepository.GetAllLinkByEmployeeId(empId);
 
             return Ok(_mapper.Map<IEnumerable<LinkDataDTO>>(linkFromRepo));
         }
 
+        [Authorize]
         [HttpGet("link/emp/{empId}/{linkId}", Name = "GetLinkByEmpIdLinkId")]
         public IActionResult GetLinkByEmpIdLinkId(Guid empId, Guid linkId)
         {
@@ -84,11 +96,19 @@ namespace ShortenLinkApi.Controllers
                 return NotFound();
             }
 
+            var claims = HttpContext.User.Claims;
+            var test = claims.Where(c => c.Type == "EmpId").FirstOrDefault().Value;
+
+            if (empId != Guid.Parse(test))
+                return Unauthorized();
+
             var linkFromRepo = _shortenLinkRepository.GetLinkByEmpIdLinkId(empId, linkId);
+            
 
             return Ok(_mapper.Map<LinkDataDTO>(linkFromRepo));
         }
 
+        [Authorize]
         [HttpPost("link/emp/{empId}")]
         public ActionResult<LinkDataDTO> CreateLinkWithEmp(Guid empId, [FromBody] LinkCreatingDTO link)
         {
@@ -110,6 +130,7 @@ namespace ShortenLinkApi.Controllers
             return CreatedAtRoute("GetLinkByEmpIdLinkId", new { empId, linkId = linkToResponse.Id }, linkToResponse);
         }
 
+        [Authorize]
         [HttpPatch("link/emp/{empId}/{linkId}")]
         public ActionResult UpdateLinkByEmpIdLinkId(Guid empId, Guid linkId, [FromBody] LinkUpdateDTO link)
         {
@@ -118,7 +139,7 @@ namespace ShortenLinkApi.Controllers
 
             var linkFromRepo = _shortenLinkRepository.GetLinkByEmpIdLinkId(empId, linkId);
 
-            var existLink = _shortenLinkRepository.GetLinkByShortLink(link.ShortLink);
+            var existLink = _shortenLinkRepository.GetLinkByShortLink(link.ShortLink);       
 
             if (existLink != null)
             {
@@ -130,6 +151,12 @@ namespace ShortenLinkApi.Controllers
 
             if (linkFromRepo.EmployeeId != empId)
                 return NotFound();
+
+            var claims = HttpContext.User.Claims;
+            var test = claims.Where(c => c.Type == "EmpId").FirstOrDefault().Value;
+
+            if (empId != Guid.Parse(test))
+                return Unauthorized();
 
             _mapper.Map(link, linkFromRepo);
             _shortenLinkRepository.UpdateLink(linkFromRepo);
@@ -149,12 +176,19 @@ namespace ShortenLinkApi.Controllers
                 Count = linkFromRepo.Count + 1
             };
 
+            var claims = HttpContext.User.Claims;
+            var test = claims.Where(c => c.Type == "EmpId").FirstOrDefault().Value;
+
+            if (linkFromRepo.EmployeeId != Guid.Parse(test))
+                return Unauthorized();
+
             _mapper.Map(link, linkFromRepo);
             _shortenLinkRepository.UpdateLink(linkFromRepo);
             _shortenLinkRepository.Save();
             return NoContent();
         }
 
+        [Authorize]
         [HttpDelete("link/emp/{empId}/{linkId}")]
         public ActionResult DeleteLinkWithEmpIdLinkId(Guid empId, Guid linkId)
         {
@@ -165,10 +199,16 @@ namespace ShortenLinkApi.Controllers
             if (linkFromRepo == null)
                 return NotFound();
 
+            var claims = HttpContext.User.Claims;
+            var test = claims.Where(c => c.Type == "EmpId").FirstOrDefault().Value;
+
+            if (linkFromRepo.EmployeeId != Guid.Parse(test))
+                return Unauthorized();
+
             _shortenLinkRepository.DeleteLink(linkFromRepo);
             _shortenLinkRepository.Save();
 
             return NoContent();
-        }        
+        }
     }
 }

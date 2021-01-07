@@ -4,22 +4,27 @@ using Entities.Model;
 using Entities.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using ShortenLinkApi.AuthService;
 using System;
 
 namespace ShortenLinkApi.Controllers
 {
     [ApiController]
     [Route("api/employee")]
+    
 
     public class EmployeeController : ControllerBase
     {
         private readonly IMapper _mapper;
         private readonly IEmployeeRepository _employeeRepository;
+        private IConfiguration _config;
 
-        public EmployeeController(IEmployeeRepository employeeRepository, IMapper mapper)
+        public EmployeeController(IEmployeeRepository employeeRepository, IMapper mapper, IConfiguration config)
         {
             _employeeRepository = employeeRepository ?? throw new ArgumentNullException(nameof(employeeRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _config = config;
         }
 
         [HttpGet("view/{empId}", Name = "GetEmpById")]
@@ -68,6 +73,21 @@ namespace ShortenLinkApi.Controllers
             return NoContent();
         }
 
+        [HttpPatch("{empId}")]
+        public ActionResult EditEmployee(Guid empId, [FromBody] EmployeeForUpdate emp)
+        {
+            var empFromRepo = _employeeRepository.GetEmployeeById(empId);
+            if (empFromRepo == null)
+                return NotFound();
+
+            _mapper.Map(emp, empFromRepo);
+            _employeeRepository.UpdateEmployee(empFromRepo);
+            _employeeRepository.Save();
+
+            return NoContent();
+        }
+        
+
         [HttpPost("auth")]
         public ActionResult Login([FromBody] AuthRequestModel auth)
         {
@@ -81,7 +101,11 @@ namespace ShortenLinkApi.Controllers
             {
                 if (_employeeRepository.ComparePassword(empFromRepo.Password, auth.Password))
                 {
-                    return Ok("Test okie");
+                    var jwt = new JWTService(_config);
+                    var roleName = _employeeRepository.GetRoleNameByRoleId(empFromRepo.RoleId);
+                    var token = jwt.GenerateSecurityToken(empFromRepo.Email, empFromRepo.UserName, roleName, empFromRepo.Id);
+                    var response = new AuthResponseModel(empFromRepo, token);
+                    return Ok(response);
                 }
             }
             return Unauthorized();

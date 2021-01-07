@@ -21,7 +21,7 @@ namespace ShortenLinkApi.AuthService
             _expDate = config.GetSection("JwtConfig").GetSection("expirationInMinutes").Value;
         }
 
-        public string GenerateSecurityToken(string email, string userName)
+        public string GenerateSecurityToken(string email, string userName, string role, Guid empId)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_secret);
@@ -30,7 +30,9 @@ namespace ShortenLinkApi.AuthService
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Email, email),
-                    new Claim("UserName", userName),                  
+                    new Claim("UserName", userName),  
+                    new Claim("Role", role),
+                    new Claim("EmpId", empId.ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(double.Parse(_expDate)),                
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),

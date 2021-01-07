@@ -97,6 +97,18 @@ namespace Entities.Service
             return _context.Employees.Where(emp => emp.UserName == userName).FirstOrDefault();
         }
 
+        public string GetRoleNameByRoleId(Guid roleId)
+        {
+            if (roleId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(roleId));
+            }
+
+            RoleModel cur = _context.RoleModels.Where(role => role.Id == roleId).FirstOrDefault();
+            return cur.RoleName;
+
+        }
+
         public bool Save()
         {
             return (_context.SaveChanges() >= 0);
@@ -104,7 +116,7 @@ namespace Entities.Service
 
         public void UpdateEmployee(EmployeeModel emp)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
