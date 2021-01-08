@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 const Slug = () => {
   const [timer, setTimer] = useState(5);
   const [slugString, setSlugString] = useState("");
+  const [flag, setFlag] = useState(true);
 
   const { slug } = useParams();
 
@@ -17,13 +18,20 @@ const Slug = () => {
     };
 
     const getSlug = async () => {
-      const response = await axios.patch(
-        `http://localhost:5000/api/linkdata/view/${slug}`
-      );
-      console.log(response);
-      setSlugString(response.data.fullLink);
+      try {
+        const response = await axios.patch(
+          `http://localhost:5000/api/linkdata/view/${slug}`
+        );
+        console.log(response);
+        setSlugString(response.data.fullLink);
+      } catch (error) {
+        alert(error.message.toString());
+      }
     };
-    if (slugString === "") getSlug();
+    if (flag) {
+      getSlug();
+      setFlag(false);
+    }
 
     const clock = setInterval(() => {
       countDown();
@@ -32,7 +40,7 @@ const Slug = () => {
     return () => {
       clearInterval(clock);
     };
-  }, [timer, slugString, slug]);
+  }, [timer, slugString, slug, flag]);
   return <>Your link will be ready in {timer} seconds</>;
 };
 
