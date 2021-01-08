@@ -7,12 +7,13 @@ import {
   ExportOutlined,
 } from "@ant-design/icons";
 import manageRequest from "../../../helper/axios/facilityApi/manageApi";
+import EditLink from "./EditLink";
 
 const TableView = (props) => {
   const { data, setIsRerender } = props;
   const PAGE_SIZE = 8;
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [recordItem, setRecordItem] = useState(null);
 
   const handleDelete = async (record) => {
@@ -26,6 +27,14 @@ const TableView = (props) => {
 
   return (
     <>
+      {recordItem && isEditModalOpen && (
+        <EditLink
+          isEditModalOpen={isEditModalOpen}
+          setIsEditModalOpen={setIsEditModalOpen}
+          setIsRerender={setIsRerender}
+          record={recordItem}
+        />
+      )}
       <Table
         dataSource={data}
         bordered
@@ -85,7 +94,10 @@ const TableView = (props) => {
                   <Button
                     type="text"
                     icon={<EditOutlined className="ant-icon icon-primary" />}
-                    onClick={() => setRecordItem(record)}
+                    onClick={() => {
+                      setRecordItem(record);
+                      setIsEditModalOpen(true);
+                    }}
                   />
                 </Tooltip>
                 <Popconfirm

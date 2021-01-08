@@ -13,6 +13,12 @@ const manageRequest = {
     const url = `api/linkdata/link/emp/${employeeId}`;
     return axiosClient.post(url, form);
   },
+  updateLink: (linkId, form) => {
+    const employeeId = localStorageService.getUserId();
+    const url = `api/linkdata/link/emp/${employeeId}/${linkId}`;
+    return axiosClient.patch(url, form);
+  },
+
   deleteLink: (linkId) => {
     const employeeId = localStorageService.getUserId();
     const url = `api/linkdata/link/emp/${employeeId}/${linkId}`;
