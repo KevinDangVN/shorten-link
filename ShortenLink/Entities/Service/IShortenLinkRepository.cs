@@ -18,7 +18,7 @@ namespace Entities.Service
         void UpdateLink(LinkDataModel link);
         void DeleteLink(LinkDataModel link);
 
-        bool EmpWithLinkExists(Guid empId);
+        bool EmpExists(Guid empId);
         bool LinkExists(Guid linkId);
         bool Save();
     }

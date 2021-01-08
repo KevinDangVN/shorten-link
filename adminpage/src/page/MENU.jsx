@@ -10,19 +10,19 @@ const MENU = [
   },
   {
     key: "facility",
-    title: "Quản lý tài sản",
+    title: "Quản lý chung",
     icon: "dashboard",
     role: [roles.EMPLOYEE, roles.ADMIN],
     sub: [
       {
         key: "manageRequest",
-        title: "Quản lý các đề xuất",
+        title: "Quản lý link",
         link: "/facility/manage",
         role: [roles.EMPLOYEE, roles.ADMIN],
       },
       {
         key: "viewRequest",
-        title: "Theo dõi đề xuất của bạn",
+        title: "Quản lý nhân viên",
         link: "/facility/status",
         role: [roles.EMPLOYEE, roles.ADMIN],
       },

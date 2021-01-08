@@ -24,7 +24,7 @@ const Facility = (props) => {
         component={MangeRequest}
       />
 
-      <Redirect to={`${match.path}/status`} />
+      <Redirect to={`${match.path}/manage`} />
     </Switch>
   );
 

@@ -8,7 +8,7 @@ const requestApi = {
     return axiosClient.get(url);
   },
   getAllRequestEmpId: () => {
-    const url = `/oisp/fm/getallrequest/${localStorageService.getUserId()}`;
+    const url = `/api/linkdata/alllinks`;
     return axiosClient.get(url);
   },
   postRequest: (formData) => {

@@ -53,6 +53,21 @@ namespace ShortenLinkApi.Controllers
             return Unauthorized();
         }
 
+        [HttpGet("link/long/{linkId}")]
+        public ActionResult<LinkDataDTO> GetLinkByLinkId(Guid linkId)
+        {
+            var linkFromRepo = _shortenLinkRepository.GetLinkByLinkId(linkId);
+            if (linkFromRepo == null)
+                return NotFound();
+            var linkResult = new LinkDataDTO()
+            {
+                Id = linkFromRepo.Id,
+                ShortLink = linkFromRepo.ShortLink,
+                FullLink = linkFromRepo.FullLink
+            };
+            return Ok(linkResult);
+        }
+
         [HttpGet("link/short/{link}")]
         public ActionResult<LinkDataDTO> GetLinkByShortLink(string link)
         {
@@ -72,7 +87,7 @@ namespace ShortenLinkApi.Controllers
         [HttpGet("link/emp/{empId}", Name = "GetAllLinkByEmpId")]
         public ActionResult<IEnumerable<LinkDataDTO>> GetAllLinkByEmpId(Guid empId)
         {
-            if (!_shortenLinkRepository.EmpWithLinkExists(empId))
+            if (!_shortenLinkRepository.EmpExists(empId))
                 return NotFound();
 
             var claims = HttpContext.User.Claims;

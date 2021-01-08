@@ -3,9 +3,9 @@ import axiosClient from "../axiosClient";
 import localStorageService from "../../localStorage/localStorageService";
 
 const manageRequest = {
-  getAllRequest: () => {
+  getAllLink: () => {
     const employeeId = localStorageService.getUserId();
-    const url = `/oisp/fm/manage/all/${employeeId}`;
+    const url = `/api/linkdata/link/emp/${employeeId}`;
     return axiosClient.get(url);
   },
   seenRequest: (requestId) => {

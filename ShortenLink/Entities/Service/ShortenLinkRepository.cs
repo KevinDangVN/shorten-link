@@ -91,13 +91,13 @@ namespace Entities.Service
 
         }
 
-        public bool EmpWithLinkExists(Guid empId)
+        public bool EmpExists(Guid empId)
         {
             if (empId == Guid.Empty)
             {
                 throw new ArgumentNullException(nameof(empId));
             }
-            return _context.LinkDatas.Any(linkData => linkData.EmployeeId == empId);
+            return _context.Employees.Any(emp => emp.Id == empId);
         }
 
         public bool LinkExists(Guid linkId)

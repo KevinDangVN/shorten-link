@@ -14,8 +14,8 @@ const MangeRequest = () => {
   useEffect(() => {
     const getAllRequest = async () => {
       try {
-        const response = await manageRequest.getAllRequest();
-
+        const response = await manageRequest.getAllLink();
+        console.log(response);
         const convertedData = response.allRequest.map((item, index) => ({
           ...item,
           key: item._id,
@@ -36,7 +36,7 @@ const MangeRequest = () => {
   return (
     <div className="px-1 py-1 table manage-fm">
       <Row className="mb-1">
-        <Heading title="Quản lý đề xuất" />
+        <Heading title="Quản lý link" />
       </Row>
       <TableView
         data={dataTable}
