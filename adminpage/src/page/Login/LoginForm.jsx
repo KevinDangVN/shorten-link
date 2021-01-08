@@ -42,8 +42,8 @@ const LoginForm = (props) => {
   };
 
   const validationForm = Yup.object().shape({
-    UserName: Yup.string().min(1).required("Vui lòng nhập thông tin"),
-    Password: Yup.string().min(1).required("Vui lòng nhập thông tin"),
+    UserName: Yup.string().min(1).required("This field is required!"),
+    Password: Yup.string().min(1).required("This field is required!"),
   });
 
   const handleSubmitForm = async (values, actions) => {

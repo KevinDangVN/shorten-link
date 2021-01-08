@@ -7,6 +7,7 @@ import { useState } from "react";
 import TableView from "./TableView";
 import showTime from "../../../helper/other/ConvertDate";
 import { PlusOutlined } from "@ant-design/icons";
+import CreateLink from "./CreateLink";
 
 const MangeRequest = () => {
   const [isRerender, setIsRerender] = useState(false);
@@ -37,6 +38,11 @@ const MangeRequest = () => {
 
   return (
     <>
+      <CreateLink
+        isCreateModalOpen={isCreateModalOpen}
+        setIsCreateModalOpen={setIsCreateModalOpen}
+        setIsRerender={setIsRerender}
+      />
       <div className="px-1 py-1 table manage-fm">
         <Row className="mb-1">
           <Heading title="Slug Management" />

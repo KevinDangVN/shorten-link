@@ -135,6 +135,7 @@ namespace ShortenLinkApi.Controllers
             }
             var linkEntity = _mapper.Map<LinkDataModel>(link);
             linkEntity.Count = 0;
+            linkEntity.CreatedAt = DateTime.Now;
 
             _shortenLinkRepository.AddLink(empId, linkEntity);
             _shortenLinkRepository.Save();

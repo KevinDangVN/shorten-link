@@ -6,6 +6,7 @@ import {
   EditOutlined,
   ExportOutlined,
 } from "@ant-design/icons";
+import manageRequest from "../../../helper/axios/facilityApi/manageApi";
 
 const TableView = (props) => {
   const { data, setIsRerender } = props;
@@ -13,6 +14,15 @@ const TableView = (props) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [recordItem, setRecordItem] = useState(null);
+
+  const handleDelete = async (record) => {
+    try {
+      const response = await manageRequest.deleteLink(record.id);
+      setIsRerender((pre) => !pre);
+    } catch (err) {
+      message.error("Something went wrong, please try again!", 5);
+    }
+  };
 
   return (
     <>
@@ -81,6 +91,7 @@ const TableView = (props) => {
                 <Popconfirm
                   placement="topLeft"
                   title="Are you sure to delete this link?"
+                  onConfirm={() => handleDelete(record)}
                 >
                   <Button
                     type="text"

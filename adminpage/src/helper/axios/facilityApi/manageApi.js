@@ -8,13 +8,15 @@ const manageRequest = {
     const url = `/api/linkdata/link/emp/${employeeId}`;
     return axiosClient.get(url);
   },
-  seenRequest: (requestId) => {
-    const url = `/oisp/fm/manage/view/${requestId}`;
-    return axiosClient.put(url);
+  createLink: (form) => {
+    const employeeId = localStorageService.getUserId();
+    const url = `api/linkdata/link/emp/${employeeId}`;
+    return axiosClient.post(url, form);
   },
-  putFMTeamLeadEditRequest: (requestId, facilityRequest) => {
-    const url = `/oisp/fm/manage/fmTeamLeadEdit/${requestId}`;
-    return axiosClient.put(url, facilityRequest);
+  deleteLink: (linkId) => {
+    const employeeId = localStorageService.getUserId();
+    const url = `api/linkdata/link/emp/${employeeId}/${linkId}`;
+    return axiosClient.delete(url);
   },
   putEditRequest: (requestId, facilityRequest) => {
     const url = `/oisp/fm/manage/fmManage/${requestId}`;
