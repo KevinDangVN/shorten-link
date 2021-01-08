@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Input, Select, InputNumber, DatePicker } from "antd";
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -96,6 +97,18 @@ const CreateAntField = ({
             {...props}
             onBlur={onBlur}
             onChange={onChange}
+          />
+        );
+      case "password":
+        return (
+          <Input.Password
+            {...field}
+            {...props}
+            onBlur={onBlur}
+            onChange={onInputChange}
+            iconRender={(visible) =>
+              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+            }
           />
         );
 

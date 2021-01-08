@@ -3,7 +3,7 @@ import { Row, Col } from "antd";
 import Tilt from "react-tilt";
 
 import OISP_Logo from "../../asset/img/OISP_Logo.png";
-import GoogleIcon from "./GoogleIcon";
+import LoginForm from "./LoginForm";
 import { Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -25,7 +25,12 @@ const LoginPage = (props) => {
         <Row justify="space-between">
           <Col md={10} xs={24} className="d-none d-md-block login--logo">
             <Tilt className="Tilt" options={{ perspective: 600 }}>
-              <img className="img-fluid" src={OISP_Logo} alt="OISP_Logo" />
+              <img
+                className="img-fluid"
+                src={OISP_Logo}
+                alt="Logo"
+                width="300px"
+              />
             </Tilt>
           </Col>
           <Col md={14} xs={24}>
@@ -34,7 +39,7 @@ const LoginPage = (props) => {
             </Row>
 
             <Row justify="center" style={{ marginTop: "2rem" }}>
-              <GoogleIcon setRedirectToReferrer={setRedirectToReferrer} />
+              <LoginForm setRedirectToReferrer={setRedirectToReferrer} />
             </Row>
           </Col>
         </Row>

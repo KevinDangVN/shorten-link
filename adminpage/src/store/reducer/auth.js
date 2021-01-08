@@ -8,7 +8,6 @@ const initState = {
   loading: false,
   role: null,
   acToken: null,
-  rfToken: null,
 };
 
 const authStart = (state, action) => {
@@ -23,7 +22,6 @@ const authSuccess = (state, action) => {
     loading: false,
     role: action.role,
     acToken: action.acToken,
-    rfToken: action.rfToken,
   });
 };
 
@@ -42,7 +40,6 @@ const authLogout = (state, action) => {
     loading: false,
     role: null,
     acToken: null,
-    rfToken: null,
   });
 };
 

@@ -13,7 +13,6 @@ export const authSuccess = (userData) => {
     fullName: userData.fullName,
     userId: userData.userId,
     acToken: userData.acToken,
-    rfToken: userData.rfToken,
     role: userData.role,
   };
 };
@@ -35,8 +34,7 @@ export const authLogout = () => {
 export const onTryAutoLogin = () => {
   return (dispatch) => {
     const acToken = localStorageService.getAccessToken();
-    const rfToken = localStorageService.getRefreshToken();
-    if (!rfToken || !acToken) {
+    if (!acToken) {
       return dispatch(authLogout());
     }
     const userData = localStorageService.getUserData();
