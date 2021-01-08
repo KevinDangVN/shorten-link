@@ -190,16 +190,12 @@ namespace ShortenLinkApi.Controllers
                 Count = linkFromRepo.Count + 1
             };
 
-            var claims = HttpContext.User.Claims;
-            var test = claims.Where(c => c.Type == "EmpId").FirstOrDefault().Value;
-
-            if (linkFromRepo.EmployeeId != Guid.Parse(test))
-                return Unauthorized();
-
             _mapper.Map(link, linkFromRepo);
             _shortenLinkRepository.UpdateLink(linkFromRepo);
             _shortenLinkRepository.Save();
-            return NoContent();
+            var linkToResponse = _mapper.Map<LinkDataDTO>(linkFromRepo);
+
+            return Ok(linkToResponse);
         }
 
         [Authorize]
