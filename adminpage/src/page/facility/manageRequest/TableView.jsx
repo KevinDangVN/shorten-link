@@ -80,7 +80,7 @@ const TableView = (props) => {
                 </Tooltip>
                 <Popconfirm
                   placement="topLeft"
-                  title="Bạn có muốn xoá đề xuất?"
+                  title="Are you sure to delete this link?"
                 >
                   <Button
                     type="text"
