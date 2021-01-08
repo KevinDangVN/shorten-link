@@ -30,7 +30,7 @@ const MangeRequest = () => {
         }));
         setDataTable(convertedData);
       } catch (error) {
-        message.error(error.message, 5);
+        message.error(error.response.data, 5);
       }
     };
     getAllRequest();

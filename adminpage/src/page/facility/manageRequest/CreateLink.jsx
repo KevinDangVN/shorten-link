@@ -38,7 +38,7 @@ const CreateLink = (props) => {
       setIsCreateModalOpen(false);
     } catch (error) {
       console.log(error);
-      message.error(error.message, 5);
+      message.error(error.response.data, 5);
     }
   };
 
