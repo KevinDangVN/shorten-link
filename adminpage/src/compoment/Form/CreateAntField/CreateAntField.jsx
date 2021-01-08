@@ -70,6 +70,7 @@ const CreateAntField = ({
             {...field}
             {...props}
             onBlur={onBlur}
+            autoComplete={field.name}
             onChange={onInputChange}
           />
         );
@@ -105,6 +106,7 @@ const CreateAntField = ({
             {...field}
             {...props}
             onBlur={onBlur}
+            autoComplete={"current-password"}
             onChange={onInputChange}
             iconRender={(visible) =>
               visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />

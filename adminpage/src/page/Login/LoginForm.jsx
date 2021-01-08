@@ -48,7 +48,15 @@ const LoginForm = (props) => {
 
   const handleSubmitForm = async (values, actions) => {
     actions.setSubmitting(false);
-    console.log(values);
+    try {
+      const response = await loginApi.postLogin(values);
+      const check = { ...response };
+      localStorageService.setUserData(check);
+      setRedirectToReferrer(true);
+      dispatch(actionCreator.authSuccess(check));
+    } catch (err) {
+      message.error(err.message);
+    }
   };
 
   return (

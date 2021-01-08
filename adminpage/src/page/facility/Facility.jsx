@@ -14,19 +14,13 @@ const Facility = (props) => {
     <Switch>
       <PrivateRoute
         path={`${match.path}/status`}
-        roles={[Roles.FULLTIME]}
+        roles={[Roles.ADMIN, Roles.EMPLOYEE]}
         component={ViewStatusRequest}
       />
 
       <PrivateRoute
         path={`${match.path}/manage`}
-        roles={[
-          Roles.FM_DEPUTY_HEAD,
-          Roles.ACCOUNTANT_LEAD,
-          Roles.DIRECTOR,
-          Roles.FM_ADMIN_LEAD,
-          Roles.FM_FACILITY_TEAM_LEAD,
-        ]}
+        roles={[Roles.ADMIN, Roles.EMPLOYEE]}
         component={MangeRequest}
       />
 

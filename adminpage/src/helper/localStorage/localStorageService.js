@@ -28,7 +28,7 @@ const localStorageService = {
   },
 
   getRole() {
-    return JSON.parse(localStorage.getItem("role"));
+    return localStorage.getItem("role");
   },
 
   getUserId() {

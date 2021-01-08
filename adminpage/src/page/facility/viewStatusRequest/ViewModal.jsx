@@ -4,7 +4,7 @@ import { Button, Col, Image, Row } from "antd";
 
 const ViewModal = (props) => {
   const { setShowViewModal, showViewModal, record } = props;
-  console.log(record);
+
   return (
     <Modal
       title="Xem lại đề xuất"

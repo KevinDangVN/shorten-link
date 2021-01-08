@@ -8,17 +8,19 @@ namespace Entities.Model
     {
         public string UserName { get; set; }
         public string FullName { get; set; }
-        public Guid RoleId { get; set; }
+        public string Role { get; set; }
         public string Email { get; set; }
-        public string Token { get; set; }
+        public string AcToken { get; set; }
+        public string UserId { get; set; }
 
-        public AuthResponseModel(EmployeeModel employee, string token)
+        public AuthResponseModel(EmployeeModel employee, string token, string role)
         {
             UserName = employee.UserName;
             FullName = employee.FullName;
-            RoleId = employee.RoleId;
+            Role = role;
             Email = employee.Email;
-            Token = token;
+            AcToken = token;
+            UserId = employee.Id.ToString();
         }
     }
 }

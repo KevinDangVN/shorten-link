@@ -104,7 +104,7 @@ namespace ShortenLinkApi.Controllers
                     var jwt = new JWTService(_config);
                     var roleName = _employeeRepository.GetRoleNameByRoleId(empFromRepo.RoleId);
                     var token = jwt.GenerateSecurityToken(empFromRepo.Email, empFromRepo.UserName, roleName, empFromRepo.Id);
-                    var response = new AuthResponseModel(empFromRepo, token);
+                    var response = new AuthResponseModel(empFromRepo, token, roleName);
                     return Ok(response);
                 }
             }

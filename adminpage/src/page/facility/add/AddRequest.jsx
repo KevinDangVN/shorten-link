@@ -61,7 +61,7 @@ const AddRequest = (props) => {
 
   const handleSubmitForm = async (values, actions) => {
     actions.setSubmitting(false);
-    console.log(values);
+
     const formData = new FormData();
     for (let key of Object.keys(files)) {
       formData.append("imgCollection", files[key]);
@@ -77,7 +77,6 @@ const AddRequest = (props) => {
       setIsRerender((pre) => !pre);
       message.success("Upload Completed", 5);
     } catch (error) {
-      console.log(error);
       message.error(
         "Something went wrong! Please contact IT Support or try again",
         10

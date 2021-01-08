@@ -84,7 +84,6 @@ const OtherRoleModal = (props) => {
   });
 
   const handleSubmitForm = async (values, action) => {
-    console.log(roleKey);
     const facilityRequest = {
       note: values.note,
       [roleKey]: formType.isApprove,

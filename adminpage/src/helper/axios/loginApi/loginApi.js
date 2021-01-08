@@ -1,9 +1,9 @@
 import axiosClient from "../axiosClient";
 
 const loginApi = {
-  postIdToken: (tokenId) => {
-    const url = "/oisp/auth/googlelogin";
-    return axiosClient.post(url, { tokenId: tokenId });
+  postLogin: (form) => {
+    const url = "api/employee/auth";
+    return axiosClient.post(url, form);
   },
 };
 

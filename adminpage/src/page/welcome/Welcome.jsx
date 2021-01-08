@@ -21,16 +21,16 @@ const Welcome = () => {
       <PrivateRoute
         path="/dashboard"
         component={Dashboard}
-        roles={[roles.FULLTIME]}
+        roles={[roles.ADMIN]}
       />
 
       <PrivateRoute
         path="/facility"
         component={Facility}
-        roles={[roles.FULLTIME]}
+        roles={[roles.EMPLOYEE, roles.ADMIN]}
       />
 
-      <Redirect to="/dashboard" />
+      <Redirect to="/facility" />
     </Switch>
   );
 
