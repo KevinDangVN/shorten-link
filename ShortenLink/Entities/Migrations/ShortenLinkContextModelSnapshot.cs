@@ -55,7 +55,7 @@ namespace Entities.Migrations
                             Id = new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"),
                             Email = "mail_1@mail.com",
                             FullName = "Nguyen Van A",
-                            Password = "AQAAAAEAACcQAAAAEB0nalNGVDOqmYCZisdcf/Vgoyrv0loQO4Vi3/dXl6AuDWgWe3kdOEMLyK4kZS3gKw==",
+                            Password = "AQAAAAEAACcQAAAAEEGfBw6M9k7u9D9L8MgnxLIEqg9HBvLzz7zeAGJx1DpZYUMFN31EP+e2lvakda3JEA==",
                             RoleId = new Guid("6f6c4608-4b39-11eb-ae93-0242ac130002"),
                             UserName = "user"
                         },
@@ -64,7 +64,7 @@ namespace Entities.Migrations
                             Id = new Guid("ad7e7c58-4b3a-11eb-ae93-0242ac130002"),
                             Email = "mail_2@mail.com",
                             FullName = "Nguyen Van N",
-                            Password = "AQAAAAEAACcQAAAAEJ9TMQtpvPhS0xgkH+/LTvKojP7YMSqO6IpH4mYYQdOOIEEWvgzUYA4677icu+LM1Q==",
+                            Password = "AQAAAAEAACcQAAAAEKojqAk0RorL0bvbczRXwBzfa4HhtlH1SYLXtPHzniu/F70pfHZX0EECOTJmQJYcTQ==",
                             RoleId = new Guid("aeeccc6d-e50f-43d9-92cf-e5b89acb8c83"),
                             UserName = "admin"
                         });
@@ -104,7 +104,7 @@ namespace Entities.Migrations
                         {
                             Id = new Guid("867e6316-4b44-11eb-ae93-0242ac130002"),
                             Count = 0,
-                            CreatedAt = new DateTime(2021, 1, 7, 14, 11, 31, 562, DateTimeKind.Local).AddTicks(5017),
+                            CreatedAt = new DateTime(2021, 1, 8, 19, 18, 54, 533, DateTimeKind.Local).AddTicks(2159),
                             EmployeeId = new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"),
                             FullLink = "https://www.google.com",
                             ShortLink = "google"
@@ -113,7 +113,7 @@ namespace Entities.Migrations
                         {
                             Id = new Guid("a63771fc-4b44-11eb-ae93-0242ac130002"),
                             Count = 0,
-                            CreatedAt = new DateTime(2021, 1, 7, 14, 11, 31, 564, DateTimeKind.Local).AddTicks(545),
+                            CreatedAt = new DateTime(2021, 1, 8, 19, 18, 54, 533, DateTimeKind.Local).AddTicks(6330),
                             EmployeeId = new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"),
                             FullLink = "https://www.uuidgenerator.net/version1",
                             ShortLink = "uuidgen"
@@ -122,7 +122,7 @@ namespace Entities.Migrations
                         {
                             Id = new Guid("a4a31ddf-d56a-4209-8030-d3a696edf8eb"),
                             Count = 0,
-                            CreatedAt = new DateTime(2021, 1, 7, 14, 11, 31, 564, DateTimeKind.Local).AddTicks(652),
+                            CreatedAt = new DateTime(2021, 1, 8, 19, 18, 54, 533, DateTimeKind.Local).AddTicks(6403),
                             EmployeeId = new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"),
                             FullLink = "https://thanhnien.vn/",
                             ShortLink = "thanhnien"
@@ -131,7 +131,7 @@ namespace Entities.Migrations
                         {
                             Id = new Guid("11f7fba0-4b45-11eb-ae93-0242ac130002"),
                             Count = 0,
-                            CreatedAt = new DateTime(2021, 1, 7, 14, 11, 31, 564, DateTimeKind.Local).AddTicks(659),
+                            CreatedAt = new DateTime(2021, 1, 8, 19, 18, 54, 533, DateTimeKind.Local).AddTicks(6411),
                             EmployeeId = new Guid("ffbed34c-4b39-11eb-ae93-0242ac130002"),
                             FullLink = "https://www.uuidgenerator.net/version4",
                             ShortLink = "uuidgen4"
