@@ -87,9 +87,6 @@ namespace ShortenLinkApi.Controllers
         [HttpGet("link/emp/{empId}", Name = "GetAllLinkByEmpId")]
         public ActionResult<IEnumerable<LinkDataDTO>> GetAllLinkByEmpId(Guid empId)
         {
-            if (!_shortenLinkRepository.EmpExists(empId))
-                return NotFound();
-
             var claims = HttpContext.User.Claims;
             var test = claims.Where(c => c.Type == "EmpId").FirstOrDefault().Value;
 
@@ -119,7 +116,7 @@ namespace ShortenLinkApi.Controllers
                 return Unauthorized();
 
             var linkFromRepo = _shortenLinkRepository.GetLinkByEmpIdLinkId(empId, linkId);
-            
+
 
             return Ok(_mapper.Map<LinkDataDTO>(linkFromRepo));
         }
@@ -155,7 +152,7 @@ namespace ShortenLinkApi.Controllers
 
             var linkFromRepo = _shortenLinkRepository.GetLinkByEmpIdLinkId(empId, linkId);
 
-            var existLink = _shortenLinkRepository.GetLinkByShortLink(link.ShortLink);       
+            var existLink = _shortenLinkRepository.GetLinkByShortLink(link.ShortLink);
 
             if (existLink != null)
             {

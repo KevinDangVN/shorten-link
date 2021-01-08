@@ -10,5 +10,6 @@ namespace Entities.DTO
         public string FullLink { get; set; }
         public string ShortLink { get; set; }
         public int Count { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

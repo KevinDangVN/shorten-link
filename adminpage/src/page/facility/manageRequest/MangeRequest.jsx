@@ -16,14 +16,14 @@ const MangeRequest = () => {
       try {
         const response = await manageRequest.getAllLink();
         console.log(response);
-        const convertedData = response.allRequest.map((item, index) => ({
+        const convertedData = response.map((item, index) => ({
           ...item,
-          key: item._id,
-          fmNumber: ++index,
-          fmEmployee: item.employeeId.fullName,
-          fmDepartment: item.employeeId.department,
-          fmStatus: item.status.overallStatus,
-          fmDate: showTime(item.updatedAt),
+          key: item.id,
+          number: ++index,
+          fullLink: item.fullLink,
+          shortlink: item.shortlink,
+          count: item.count,
+          date: showTime(item.createdAt),
         }));
         setDataTable(convertedData);
       } catch (error) {
