@@ -47,7 +47,7 @@ const ViewStatusRequest = () => {
       />
       <div className="px-1 py-1 table fm-viewall">
         <Row className="mb-1">
-          <Heading title="Các đề xuất của bạn" />
+          <Heading title="Employee Management" />
 
           <Col className="ml-auto text-right d-flex align-center">
             <Button
@@ -61,10 +61,6 @@ const ViewStatusRequest = () => {
           </Col>
         </Row>
         <TableCompoment data={data} setIsRerender={setIsRerender} />
-        <p style={{ fontStyle: "italic", color: "grey" }}>
-          Lưu ý: Bạn chỉ có thể thay đổi / xoá đề xuất trước khi trưởng phòng
-          phê duyệt.
-        </p>
       </div>
     </>
   );

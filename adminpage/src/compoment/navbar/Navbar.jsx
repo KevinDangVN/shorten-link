@@ -61,14 +61,14 @@ const Navbar = (props) => {
         </ul>
 
         <ul className="nvbar--nav nv--right">
-          {/* <NotiMenu
+          <NotiMenu
             id={handleRightMenu[0].id}
             index={handleRightMenu[0].index}
             tabIndex={handleRightMenu[0].tabIndex}
             icon={handleRightMenu[0].icon}
             active={handleRightMenu[0].active}
             toggleRightMenu={toggleRightMenu}
-          /> */}
+          />
           <UserMenu
             id={handleRightMenu[1].id}
             index={handleRightMenu[1].index}

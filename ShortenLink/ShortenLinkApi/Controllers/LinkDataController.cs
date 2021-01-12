@@ -50,7 +50,7 @@ namespace ShortenLinkApi.Controllers
                 var count = _shortenLinkRepository.CountAllClick();
                 return Ok(_mapper.Map<IEnumerable<LinkDataDTO>>(linkFromRepo));
             }
-            return Unauthorized();
+            return Unauthorized("You are not authorized!");
         }
 
         [HttpGet("link/long/{linkId}")]
@@ -91,7 +91,7 @@ namespace ShortenLinkApi.Controllers
             var test = claims.Where(c => c.Type == "EmpId").FirstOrDefault().Value;
 
             if (empId != Guid.Parse(test))
-                return Unauthorized();
+                return Unauthorized("You are not authorized!");
 
             var linkFromRepo = _shortenLinkRepository.GetAllLinkByEmployeeId(empId);
 
@@ -113,7 +113,7 @@ namespace ShortenLinkApi.Controllers
             var test = claims.Where(c => c.Type == "EmpId").FirstOrDefault().Value;
 
             if (empId != Guid.Parse(test))
-                return Unauthorized();
+                return Unauthorized("You are not authorized!");
 
             var linkFromRepo = _shortenLinkRepository.GetLinkByEmpIdLinkId(empId, linkId);
 
@@ -170,7 +170,7 @@ namespace ShortenLinkApi.Controllers
             var test = claims.Where(c => c.Type == "EmpId").FirstOrDefault().Value;
 
             if (empId != Guid.Parse(test))
-                return Unauthorized();
+                return Unauthorized("You are not authorized!");
 
             _mapper.Map(link, linkFromRepo);
             _shortenLinkRepository.UpdateLink(linkFromRepo);
@@ -194,7 +194,6 @@ namespace ShortenLinkApi.Controllers
             _shortenLinkRepository.UpdateLink(linkFromRepo);
             _shortenLinkRepository.Save();
             var linkToResponse = _mapper.Map<LinkDataDTO>(linkFromRepo);
-
             return Ok(linkToResponse);
         }
 
@@ -213,7 +212,7 @@ namespace ShortenLinkApi.Controllers
             var test = claims.Where(c => c.Type == "EmpId").FirstOrDefault().Value;
 
             if (linkFromRepo.EmployeeId != Guid.Parse(test))
-                return Unauthorized();
+                return Unauthorized("You are not authorized!");
 
             _shortenLinkRepository.DeleteLink(linkFromRepo);
             _shortenLinkRepository.Save();

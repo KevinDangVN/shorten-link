@@ -10,6 +10,7 @@ const UserMenu = (props) => {
   const dispatch = useDispatch();
 
   const handleUserMenuClick = (item) => {
+    console.log(item);
     switch (item.key) {
       case "clear":
         localStorageService.clearAll();
@@ -48,8 +49,9 @@ const UserMenu = (props) => {
             return (
               <li key={item.key} className="owdropdown-menu--item">
                 <div
-                  onClick={() => handleUserMenuClick(item)}
                   className="owdropdown-menu--link"
+                  onClick={() => handleUserMenuClick(item)}
+                  onMouseDown={() => handleUserMenuClick(item)}
                 >
                   <div>
                     <span className="material-icons">{item.icon}</span>

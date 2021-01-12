@@ -17,13 +17,13 @@ const MENU = [
       {
         key: "manageRequest",
         title: "Quản lý link",
-        link: "/facility/manage",
+        link: "/facility/slug",
         role: [roles.EMPLOYEE, roles.ADMIN],
       },
       {
         key: "viewRequest",
         title: "Quản lý nhân viên",
-        link: "/facility/status",
+        link: "/facility/employee",
         role: [roles.EMPLOYEE, roles.ADMIN],
       },
     ],
