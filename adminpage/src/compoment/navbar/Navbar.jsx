@@ -2,7 +2,6 @@ import React, { useCallback, useState } from "react";
 
 import Logo from "../../asset/img/oisp_favicon.ico";
 import NotiMenu from "./notiMenu/NotiMenu";
-import SearchForm from "./searchForm/SearchForm";
 import UserMenu from "./userMenu/UserMenu";
 
 const Navbar = (props) => {

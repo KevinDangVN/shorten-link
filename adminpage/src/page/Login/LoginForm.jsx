@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import GoogleLogin from "react-google-login";
 import { Formik, Field } from "formik";
 import * as Yup from "yup";
 import { Row, Col, message, Button, Form as AntdForm } from "antd";
@@ -14,27 +13,6 @@ const LoginForm = (props) => {
   const { setRedirectToReferrer } = props;
 
   const dispatch = useDispatch();
-
-  const responseSuccessGoogle = async (response) => {
-    try {
-      const verifiedData = await loginApi.postIdToken(response.tokenId);
-      const user = verifiedData.user;
-      if (user) {
-        localStorageService.setUserData(user);
-        setRedirectToReferrer(true);
-        dispatch(actionCreator.authSuccess(user));
-      } else {
-        localStorageService.clearAll();
-        throw new Error();
-      }
-    } catch (error) {
-      message.error("Something went wrong! Please try again", 5);
-    }
-  };
-
-  const responseErrorGoogle = (response) => {
-    message.error("Something went wrong! Please try again", 5);
-  };
 
   const initForm = {
     UserName: "",

@@ -1,7 +1,5 @@
 import axiosClient from "../axiosClient";
 
-import localStorageService from "../../localStorage/localStorageService";
-
 const requestApi = {
   getAllEmployee: () => {
     const url = `/api/employee/viewall`;

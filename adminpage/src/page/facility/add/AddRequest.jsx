@@ -4,7 +4,6 @@ import * as Yup from "yup";
 import { Row, Col, message, Button, Form as AntdForm } from "antd";
 
 import CreateAntField from "../../../compoment/Form/CreateAntField/CreateAntField";
-import ImageUpload from "../../../compoment/ImageMultipleUpload/ImageUpload";
 import requestApi from "../../../helper/axios/facilityApi/requestApi";
 import Modal from "antd/lib/modal/Modal";
 
@@ -56,7 +55,9 @@ const AddRequest = (props) => {
     fetchRoleId();
   }, []);
 
-  const handleSubmitForm = async (values, actions) => {};
+  const handleSubmitForm = async (values, actions) => {
+    console.log(values);
+  };
 
   return (
     <Modal
@@ -131,26 +132,6 @@ const AddRequest = (props) => {
                     />
                   </Col>
                 </Row>
-
-                {/* <Row>
-                  <Col xs={24}>
-                    <Collapse
-                      // bordered={false}
-                      defaultActiveKey={null}
-                      expandIcon={({ isActive }) => (
-                        <CaretRightOutlined rotate={isActive ? 90 : 0} />
-                      )}
-                    >
-                      <Panel
-                        header="Thông tin bổ sung (nếu có)"
-                        key="1"
-                        className="panel"
-                      >
-                        <div className="panel__content">aa</div>
-                      </Panel>
-                    </Collapse>
-                  </Col>
-                </Row> */}
 
                 <Row justify="center" style={{ marginTop: "2rem" }}>
                   <Button type="primary" htmlType="submit" className="border">

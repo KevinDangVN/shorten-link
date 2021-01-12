@@ -1,11 +1,7 @@
 import { message, Table, Tooltip, Button, Popconfirm } from "antd";
 import Column from "antd/lib/table/Column";
 import React, { useState } from "react";
-import {
-  DeleteOutlined,
-  EditOutlined,
-  ExportOutlined,
-} from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import manageRequest from "../../../helper/axios/facilityApi/manageApi";
 import EditLink from "./EditLink";
 
