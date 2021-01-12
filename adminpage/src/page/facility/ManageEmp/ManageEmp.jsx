@@ -9,21 +9,21 @@ import { useEffect } from "react";
 import requestApi from "../../../helper/axios/facilityApi/requestApi";
 import AddRequest from "../add/AddRequest";
 
-const ViewStatusRequest = () => {
+const ManageEmp = () => {
   const [isRerender, setIsRerender] = useState(false);
   const [data, setData] = useState([]);
   const [isAddRequestOpen, setIsAddRequestOpen] = useState(false);
 
   useEffect(() => {
-    const fetchAllRequest = async () => {
+    const fetchAllEmp = async () => {
       try {
-        const response = await requestApi.getAllRequestEmpId();
-        const dataTable = response.allRequest.map((item, index) => {
+        const response = await requestApi.getAllEmployee();
+        console.log(response);
+        const dataTable = response.map((item, index) => {
           return {
             ...item,
             number: index + 1,
-            key: item._id,
-            ...item.status,
+            key: item.id,
           };
         });
         setData(dataTable);
@@ -31,7 +31,7 @@ const ViewStatusRequest = () => {
         message.error(err.message, 5);
       }
     };
-    fetchAllRequest();
+    fetchAllEmp();
   }, [isRerender]);
 
   const handleOpenRequest = () => {
@@ -56,7 +56,7 @@ const ViewStatusRequest = () => {
               className="border"
               onClick={handleOpenRequest}
             >
-              Thêm đề xuất
+              Create Employee
             </Button>
           </Col>
         </Row>
@@ -66,4 +66,4 @@ const ViewStatusRequest = () => {
   );
 };
 
-export default ViewStatusRequest;
+export default ManageEmp;

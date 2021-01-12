@@ -9,7 +9,7 @@ import showTime from "../../../helper/other/ConvertDate";
 import { PlusOutlined } from "@ant-design/icons";
 import CreateLink from "./CreateLink";
 
-const MangeRequest = () => {
+const ManageSlug = () => {
   const [isRerender, setIsRerender] = useState(false);
   const [dataTable, setDataTable] = useState([]);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -68,4 +68,4 @@ const MangeRequest = () => {
   );
 };
 
-export default MangeRequest;
+export default ManageSlug;

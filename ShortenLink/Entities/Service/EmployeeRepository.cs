@@ -97,6 +97,11 @@ namespace Entities.Service
             return _context.Employees.Where(emp => emp.UserName == userName).FirstOrDefault();
         }
 
+        public IEnumerable<RoleModel> GetRoleId()
+        {
+            return _context.RoleModels.ToList();
+        }
+
         public string GetRoleNameByRoleId(Guid roleId)
         {
             if (roleId == Guid.Empty)

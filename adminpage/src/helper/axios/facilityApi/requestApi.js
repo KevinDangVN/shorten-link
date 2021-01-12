@@ -3,8 +3,8 @@ import axiosClient from "../axiosClient";
 import localStorageService from "../../localStorage/localStorageService";
 
 const requestApi = {
-  getAllFMType: () => {
-    const url = "/oisp/fm/type";
+  getAllEmployee: () => {
+    const url = `/api/employee/viewall`;
     return axiosClient.get(url);
   },
   getAllRequestEmpId: () => {
@@ -22,6 +22,10 @@ const requestApi = {
   editRequest: (requestId, formData) => {
     const url = `/oisp/fm/request/${requestId}`;
     return axiosClient.put(url, formData);
+  },
+  getRoleId: () => {
+    const url = "/api/employee/getrole";
+    return axiosClient.get(url);
   },
 };
 

@@ -2,11 +2,14 @@
 using Entities.DTO;
 using Entities.Model;
 using Entities.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using ShortenLinkApi.AuthService;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ShortenLinkApi.Controllers
 {
@@ -26,6 +29,40 @@ namespace ShortenLinkApi.Controllers
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _config = config;
         }
+
+        [Authorize]
+        [HttpGet("getrole")]
+        public IActionResult GetRoleId()
+        {
+            var claims = HttpContext.User.Claims;
+            var test = claims.Where(c => c.Type == "Role").FirstOrDefault().Value;
+
+            if (test == "Admin")
+            {
+                var roleFromRepo = _employeeRepository.GetRoleId();
+                return Ok(_mapper.Map<IEnumerable<RoleModel>>(roleFromRepo));
+            }
+            return Unauthorized("You are not authorized!");
+        }
+
+        [Authorize]
+        [HttpGet("viewall")]
+        public IActionResult GetAllEmployee()
+        {
+            var claims = HttpContext.User.Claims;
+            var test = claims.Where(c => c.Type == "Role").FirstOrDefault().Value;
+
+            
+
+            if (test == "Admin")
+            {
+                var empFromRepo = _employeeRepository.GetAllEmployee();
+                return Ok(_mapper.Map<IEnumerable<EmployeeDTO>>(empFromRepo));
+            }
+            return Unauthorized("You are not authorized!");
+
+        }
+
 
         [HttpGet("view/{empId}", Name = "GetEmpById")]
         public IActionResult GetEmpById(Guid empId)

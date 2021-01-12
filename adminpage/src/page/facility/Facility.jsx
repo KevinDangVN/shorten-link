@@ -3,8 +3,8 @@ import { Redirect, Switch, useRouteMatch } from "react-router-dom";
 
 import PrivateRoute from "../../compoment/privateRoute/PrivateRoute";
 import Roles from "../../helper/config/Roles";
-import MangeRequest from "./manageRequest/MangeRequest";
-import ViewStatusRequest from "./viewStatusRequest/ViewStatusRequest";
+import ManageSlug from "./ManageSlug/ManageSlug";
+import ManageEmp from "./ManageEmp/ManageEmp";
 
 const Facility = (props) => {
   let routes;
@@ -14,14 +14,14 @@ const Facility = (props) => {
     <Switch>
       <PrivateRoute
         path={`${match.path}/employee`}
-        roles={[Roles.ADMIN, Roles.EMPLOYEE]}
-        component={ViewStatusRequest}
+        roles={[Roles.ADMIN]}
+        component={ManageEmp}
       />
 
       <PrivateRoute
         path={`${match.path}/slug`}
         roles={[Roles.ADMIN, Roles.EMPLOYEE]}
-        component={MangeRequest}
+        component={ManageSlug}
       />
 
       <Redirect to={`${match.path}/manage`} />

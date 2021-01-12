@@ -10,19 +10,14 @@ import Modal from "antd/lib/modal/Modal";
 
 const AddRequest = (props) => {
   const { isAddRequestOpen, setIsAddRequestOpen, setIsRerender } = props;
-  const [fmBigGroupType, setFmBigGroupType] = useState();
-  const [fmUnit, setFmUnit] = useState(null);
-  const [files, setFiles] = useState([]);
-  const [previewURLs, setPreviewURLs] = useState([]);
+  const [roleArray, setRoleArray] = useState([]);
 
   const initForm = {
-    fmName: "",
-    fmBigGroup: "",
-    purpose: "",
-    quantity: 1,
-    specs: "",
-    imgUpload: "",
-    unit: Array.isArray(fmUnit) ? fmUnit[0].value : "",
+    FullName: "",
+    Email: "",
+    UserName: "",
+    Password: "",
+    RoleId: "",
   };
 
   const layout = {
@@ -30,25 +25,27 @@ const AddRequest = (props) => {
     wrapperCol: { span: 16 },
   };
 
-  const digitsOnly = (value) => /^\d+$/.test(value);
-
   const validationForm = Yup.object().shape({
-    fmName: Yup.string().min(1).required("Vui lòng nhập thông tin"),
-    fmBigGroup: Yup.string().min(1).required("Vui lòng chọn thông tin"),
-    purpose: Yup.string().min(1).required("Vui lòng nhập thông tin"),
-    quantity: Yup.string()
-      .min(1)
-      .required("Vui lòng nhập thông tin")
-      .test("Digits only", "Vui lòng chỉ nhập số", digitsOnly),
-    unit: Yup.string().required("Vui lòng nhập thông tin"),
+    FullName: Yup.string().min(1).required("This field is required!"),
+    Email: Yup.string().min(1).required("This field is required!"),
+    UserName: Yup.string().min(1).required("This field is required!"),
+    Password: Yup.string().min(1).required("This field is required!"),
+    RoleId: Yup.string().min(1).required("This field is required!"),
   });
 
   useEffect(() => {
-    const fetchFNBigGroup = async () => {
+    const fetchRoleId = async () => {
       try {
-        const data = await requestApi.getAllFMType();
-        setFmBigGroupType(data.allType);
-        setFmUnit(data.unitType);
+        const data = await requestApi.getRoleId();
+        console.log(data);
+        const converted = data.map((item) => {
+          return {
+            key: item.id,
+            value: item.roleId,
+            label: item.roleName,
+          };
+        });
+        setRoleArray(converted);
       } catch (error) {
         message.error(
           "Something went wrong! Please contact IT Support or try again",
@@ -56,44 +53,19 @@ const AddRequest = (props) => {
         );
       }
     };
-    fetchFNBigGroup();
+    fetchRoleId();
   }, []);
 
-  const handleSubmitForm = async (values, actions) => {
-    actions.setSubmitting(false);
-
-    const formData = new FormData();
-    for (let key of Object.keys(files)) {
-      formData.append("imgCollection", files[key]);
-    }
-    formData.append("facilityRequest", JSON.stringify(values));
-    try {
-      await requestApi.postRequest(formData);
-      actions.resetForm();
-      actions.setSubmitting(false);
-      setIsAddRequestOpen(false);
-      setPreviewURLs([]);
-      setFiles([]);
-      setIsRerender((pre) => !pre);
-      message.success("Upload Completed", 5);
-    } catch (error) {
-      message.error(
-        "Something went wrong! Please contact IT Support or try again",
-        10
-      );
-    }
-  };
+  const handleSubmitForm = async (values, actions) => {};
 
   return (
     <Modal
-      title="Thêm đề xuất"
+      title="Create Employee"
       visible={isAddRequestOpen}
       footer={null}
       centered
       width={960}
       onCancel={() => {
-        setPreviewURLs([]);
-        setFiles([]);
         setIsAddRequestOpen(false);
       }}
       maskClosable={false}
@@ -117,9 +89,9 @@ const AddRequest = (props) => {
                   <Col xs={24} lg={12}>
                     <Field
                       component={CreateAntField}
-                      name="fmName"
+                      name="UserName"
                       type="text"
-                      label="Danh mục đề xuất*"
+                      label="Username *"
                       submitCount={submitCount}
                       hasFeedback
                     />
@@ -127,10 +99,10 @@ const AddRequest = (props) => {
                   <Col xs={24} lg={12}>
                     <Field
                       component={CreateAntField}
-                      name="fmBigGroup"
+                      name="RoleId"
                       type="select"
-                      label="Loại danh mục *"
-                      selectOptions={fmBigGroupType}
+                      label="Role *"
+                      selectOptions={roleArray}
                       submitCount={submitCount}
                       hasFeedback
                       style={{ minWidth: 150 }}
@@ -141,9 +113,9 @@ const AddRequest = (props) => {
                   <Col xs={24} lg={12}>
                     <Field
                       component={CreateAntField}
-                      name="purpose"
-                      label="Mục đích sử dụng*"
-                      type="textarea"
+                      name="Password"
+                      label="Password*"
+                      type="password"
                       submitCount={submitCount}
                       hasFeedback
                     />
@@ -151,40 +123,15 @@ const AddRequest = (props) => {
                   <Col xs={24} lg={12}>
                     <Field
                       component={CreateAntField}
-                      name="specs"
-                      label="Quy cách cấu hình"
-                      type="textarea"
+                      name="Email"
+                      label="Email*"
+                      type="text"
                       submitCount={submitCount}
                       hasFeedback
                     />
                   </Col>
                 </Row>
-                <Row gutter={[48, 16]}>
-                  <Col xs={24} lg={12}>
-                    <Field
-                      component={CreateAntField}
-                      name="quantity"
-                      label="Số lượng đề xuất *"
-                      type="number"
-                      submitCount={submitCount}
-                      hasFeedback
-                      style={{ width: "100%" }}
-                    />
-                  </Col>
-                  <Col xs={24} lg={12}>
-                    <Field
-                      component={CreateAntField}
-                      name="unit"
-                      label="Đơn vị tính *"
-                      type="select"
-                      selectOptions={fmUnit}
-                      submitCount={submitCount}
-                      hasFeedback
-                      defaultValue={values.unit}
-                      style={{ width: "100%" }}
-                    />
-                  </Col>
-                </Row>
+
                 {/* <Row>
                   <Col xs={24}>
                     <Collapse
@@ -205,16 +152,9 @@ const AddRequest = (props) => {
                   </Col>
                 </Row> */}
 
-                <ImageUpload
-                  files={files}
-                  setFiles={setFiles}
-                  previewURLs={previewURLs}
-                  setPreviewURLs={setPreviewURLs}
-                />
-
                 <Row justify="center" style={{ marginTop: "2rem" }}>
                   <Button type="primary" htmlType="submit" className="border">
-                    Gửi thông tin
+                    Create
                   </Button>
                 </Row>
               </AntdForm>

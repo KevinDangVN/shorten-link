@@ -11,7 +11,9 @@ namespace Entities.Service
         EmployeeModel GetEmployeeById(Guid id);
         EmployeeModel GetEmployeeByEmail(string email);
         EmployeeModel GetEmployeeByUserName(string userName);
-        string GetRoleNameByRoleId(Guid roleId);       
+        IEnumerable<RoleModel> GetRoleId();
+
+        string GetRoleNameByRoleId(Guid roleId);
 
         void AddEmployee(Guid RoleId, EmployeeModel emp);
         void UpdateEmployee(EmployeeModel emp);
