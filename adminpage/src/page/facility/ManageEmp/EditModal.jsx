@@ -1,4 +1,4 @@
-import { Col, message, Row, Form as AntForm } from "antd";
+import { Col, message, Row, Form as AntdForm } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import { Formik, Field } from "formik";
 import React, { useEffect, useRef, useState } from "react";
@@ -17,81 +17,49 @@ const EditModal = (props) => {
   };
 
   const initForm = {
-    fmName: record.fmName,
-    fmBigGroup: record.fmBigGroup.label,
-    purpose: record.purpose,
-    quantity: record.quantity,
-    specs: record.specs,
-    imgCollection: record.imgCollection,
-    unit: record.unit.label,
+    FullName: record.fullName,
+    Email: record.email,
+    UserName: record.userName,
+    Password: record.password,
+    RoleId: record.roleId,
   };
 
   const [fmBigGroupType, setFmBigGroupType] = useState();
   const [fmUnit, setFmUnit] = useState([]);
-  const [files, setFiles] = useState([]);
-  const [previewURLs, setPreviewURLs] = useState([]);
+  const [roleArray, setRoleArray] = useState([]);
+
   const formRef = useRef();
 
-  const digitsOnly = (value) => /^\d+$/.test(value);
-
   const validationForm = Yup.object().shape({
-    fmName: Yup.string().min(1).required("Vui lòng nhập thông tin"),
-    fmBigGroup: Yup.string().min(1).required("Vui lòng chọn thông tin"),
-    purpose: Yup.string().min(1).required("Vui lòng nhập thông tin"),
-    quantity: Yup.string()
-      .min(1)
-      .required("Vui lòng nhập thông tin")
-      .test("Digits only", "Vui lòng chỉ nhập số", digitsOnly),
-    unit: Yup.string().required("Vui lòng nhập thông tin"),
+    FullName: Yup.string().min(1).required("This field is required!"),
+    Email: Yup.string().min(1).required("This field is required!"),
+    UserName: Yup.string().min(1).required("This field is required!"),
+    Password: Yup.string().min(1).required("This field is required!"),
+    RoleId: Yup.string().min(1).required("This field is required!"),
   });
-
-  useEffect(() => {
-    const imgPreview = record.imgCollection.map((item) => ({
-      key: item,
-      preview: item,
-    }));
-    setPreviewURLs(imgPreview);
-  }, [record]);
 
   const handleCancel = (e) => {
     setShowEditModal(false);
   };
 
-  const handleOk = async (ref) => {
-    const formData = new FormData();
-    if (files.length > 0) {
-      for (let key of Object.keys(files)) {
-        formData.append("imgCollection", files[key]);
-      }
-    }
-    formData.append("facilityRequest", JSON.stringify(ref.current.values));
-    try {
-      await requestApi.editRequest(record._id, formData);
-      message.success("This information was updated successfully.");
-      setPreviewURLs([]);
-      setFiles([]);
-      setShowEditModal(false);
-      setIsRerender((pre) => !pre);
-    } catch (error) {
-      message.error("Something went wrong.");
-    }
-  };
+  const handleOk = async (ref) => {};
 
   useEffect(() => {
-    const fetchFNBigGroup = async () => {
-      try {
-        const data = await requestApi.getAllFMType();
-        setFmBigGroupType(data.allType);
-        setFmUnit(data.unitType);
-      } catch (error) {
-        message.error(
-          "Something went wrong! Please contact IT Support or try again",
-          10
-        );
-      }
+    const getRoleNameById = async () => {
+      const data = await requestApi.getRoleId();
+      console.log(data);
+      const converted = data.map((item) => {
+        return {
+          key: item.id,
+          value: item.id,
+          label: item.roleName,
+        };
+      });
+      setRoleArray(converted);
     };
-    fetchFNBigGroup();
-  }, []);
+
+    getRoleNameById();
+  }, [record]);
 
   return (
     <Modal
@@ -112,14 +80,18 @@ const EditModal = (props) => {
       >
         {({ handleSubmit, submitCount, values }) => {
           return (
-            <AntForm onFinish={handleSubmit} {...layout}>
+            <AntdForm
+              {...layout}
+              onFinish={handleSubmit}
+              className="fm-rq__wrapper"
+            >
               <Row gutter={[48, 16]}>
                 <Col xs={24} lg={12}>
                   <Field
                     component={CreateAntField}
-                    name="fmName"
+                    name="UserName"
                     type="text"
-                    label="Danh mục đề xuất*"
+                    label="Username *"
                     submitCount={submitCount}
                     hasFeedback
                   />
@@ -127,67 +99,57 @@ const EditModal = (props) => {
                 <Col xs={24} lg={12}>
                   <Field
                     component={CreateAntField}
-                    name="fmBigGroup"
+                    name="RoleId"
                     type="select"
-                    label="Loại danh mục *"
-                    selectOptions={fmBigGroupType}
+                    label="Role *"
+                    selectOptions={roleArray}
                     submitCount={submitCount}
                     hasFeedback
-                    style={{ minWidth: 200 }}
-                  />
-                </Col>
-                <Col xs={24} lg={12}>
-                  <Field
-                    component={CreateAntField}
-                    name="purpose"
-                    label="Mục đích sử dụng*"
-                    type="textarea"
-                    submitCount={submitCount}
-                    hasFeedback
-                  />
-                </Col>
-                <Col xs={24} lg={12}>
-                  <Field
-                    component={CreateAntField}
-                    name="specs"
-                    label="Quy cách cấu hình"
-                    type="textarea"
-                    submitCount={submitCount}
-                    hasFeedback
-                  />
-                </Col>
-                <Col xs={24} lg={12}>
-                  <Field
-                    component={CreateAntField}
-                    name="quantity"
-                    label="Số lượng đề xuất *"
-                    type="number"
-                    submitCount={submitCount}
-                    hasFeedback
-                    defaultValue={values.quantity}
-                    style={{ width: "100%" }}
-                  />
-                </Col>
-                <Col xs={24} lg={12}>
-                  <Field
-                    component={CreateAntField}
-                    name="unit"
-                    label="Đơn vị tính *"
-                    type="select"
-                    selectOptions={fmUnit}
-                    submitCount={submitCount}
-                    hasFeedback
-                    style={{ width: "100%" }}
+                    style={{ minWidth: 150 }}
                   />
                 </Col>
               </Row>
-              <ImageUpload
-                files={files}
-                setFiles={setFiles}
-                previewURLs={previewURLs}
-                setPreviewURLs={setPreviewURLs}
-              />
-            </AntForm>
+              <Row gutter={[48, 16]}>
+                <Col xs={24} lg={12}>
+                  <Field
+                    component={CreateAntField}
+                    name="Password"
+                    label="Password*"
+                    type="password"
+                    submitCount={submitCount}
+                    hasFeedback
+                  />
+                </Col>
+                <Col xs={24} lg={12}>
+                  <Field
+                    component={CreateAntField}
+                    name="Email"
+                    label="Email*"
+                    type="text"
+                    submitCount={submitCount}
+                    hasFeedback
+                  />
+                </Col>
+              </Row>
+              <Row gutter={[48, 16]}>
+                <Col xs={24} lg={12}>
+                  <Field
+                    component={CreateAntField}
+                    name="FullName"
+                    label="Full Name*"
+                    type="text"
+                    submitCount={submitCount}
+                    hasFeedback
+                  />
+                </Col>
+              </Row>
+
+              {/* <Row justify="center" style={{ marginTop: "2rem" }}>
+                  <Button type="primary" htmlType="submit" className="border">
+                    Create
+                  </Button>
+                </Row> */}
+            </AntdForm>
           );
         }}
       </Formik>

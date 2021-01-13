@@ -13,8 +13,12 @@ const requestApi = {
     const url = "/api/employee";
     return axiosClient.post(url, formData);
   },
-  deleteRequest: (requestId) => {
-    const url = `/oisp/fm/request/${requestId}`;
+  getRoleNameById: (id) => {
+    const url = `/api/employee/getrolename/${id}`;
+    return axiosClient.get(url);
+  },
+  deleteEmp: (empId) => {
+    const url = `/api/employee/${empId}`;
     return axiosClient.delete(url);
   },
   editRequest: (requestId, formData) => {

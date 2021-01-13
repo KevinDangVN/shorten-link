@@ -82,6 +82,7 @@ const CreateAntField = ({
             onBlur={onBlur}
             onChange={onChange}
             showSearch
+            defaultValue={props.defaultValue ? props.defaultValue : ""}
           >
             {selectOptions &&
               selectOptions.map((name) => (

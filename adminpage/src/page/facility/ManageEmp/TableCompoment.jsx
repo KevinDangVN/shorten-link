@@ -7,9 +7,8 @@ import EditModal from "./EditModal";
 
 const TableCompoment = (props) => {
   const { data, setIsRerender } = props;
-  const { Column, ColumnGroup } = Table;
+  const { Column } = Table;
   const [showEditModal, setShowEditModal] = useState(false);
-  const [showViewModal, setShowViewModal] = useState(false);
   const [recordItem, setRecordItem] = useState(null);
 
   const PAGE_SIZE = 5;
@@ -17,7 +16,7 @@ const TableCompoment = (props) => {
   const handleDeleteRequest = useCallback(
     async (record) => {
       try {
-        await requestApi.deleteRequest(record._id);
+        await requestApi.deleteEmp(record.id);
         message.success("The information was deleted successfully.");
         setIsRerender((pre) => !pre);
       } catch (error) {
@@ -28,20 +27,8 @@ const TableCompoment = (props) => {
   );
 
   const handleModal = useCallback((record) => {
-    if (
-      record.overallStatus &&
-      !!record.isDeputyHeadApproval === false &&
-      !!record.isFMTeamLeadApproval === false &&
-      !!record.isAdminLeadApproval === false &&
-      !!record.isAccountLeadApproval === false &&
-      !!record.isDirectorApproval === false
-    ) {
-      setRecordItem(record);
-      setShowEditModal(true);
-    } else {
-      setRecordItem(record);
-      setShowViewModal(true);
-    }
+    setRecordItem(record);
+    setShowEditModal(true);
   }, []);
 
   return useMemo(
@@ -90,7 +77,7 @@ const TableCompoment = (props) => {
                 </Tooltip>
                 <Popconfirm
                   placement="topLeft"
-                  title="Bạn có muốn xoá đề xuất?"
+                  title="Are you sure?"
                   onConfirm={() => handleDeleteRequest(record)}
                 >
                   <Button
