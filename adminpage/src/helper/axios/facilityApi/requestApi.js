@@ -9,8 +9,8 @@ const requestApi = {
     const url = `/api/linkdata/alllinks`;
     return axiosClient.get(url);
   },
-  postRequest: (formData) => {
-    const url = "/oisp/fm/request/add";
+  postEmployee: (formData) => {
+    const url = "/api/employee";
     return axiosClient.post(url, formData);
   },
   deleteRequest: (requestId) => {

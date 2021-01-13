@@ -24,7 +24,7 @@ const Facility = (props) => {
         component={ManageSlug}
       />
 
-      <Redirect to={`${match.path}/manage`} />
+      <Redirect to={`${match.path}/slug`} />
     </Switch>
   );
 

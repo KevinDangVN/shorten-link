@@ -40,11 +40,12 @@ const AddRequest = (props) => {
         const converted = data.map((item) => {
           return {
             key: item.id,
-            value: item.roleId,
+            value: item.id,
             label: item.roleName,
           };
         });
         setRoleArray(converted);
+        console.log(converted);
       } catch (error) {
         message.error(
           "Something went wrong! Please contact IT Support or try again",
@@ -57,6 +58,14 @@ const AddRequest = (props) => {
 
   const handleSubmitForm = async (values, actions) => {
     console.log(values);
+    try {
+      await requestApi.postEmployee(values);
+      message.success("Created successfully!");
+      setIsAddRequestOpen(false);
+      setIsRerender((pre) => !pre);
+    } catch (error) {
+      message.error(error.response.data, 5);
+    }
   };
 
   return (
@@ -75,9 +84,8 @@ const AddRequest = (props) => {
       <div className="fm-rq">
         <Formik
           initialValues={initForm}
-          validationSchema={validationForm}
           onSubmit={handleSubmitForm}
-          enableReinitialize={true}
+          validationSchema={validationForm}
         >
           {({ handleSubmit, submitCount, values }) => {
             return (
@@ -126,6 +134,18 @@ const AddRequest = (props) => {
                       component={CreateAntField}
                       name="Email"
                       label="Email*"
+                      type="text"
+                      submitCount={submitCount}
+                      hasFeedback
+                    />
+                  </Col>
+                </Row>
+                <Row gutter={[48, 16]}>
+                  <Col xs={24} lg={12}>
+                    <Field
+                      component={CreateAntField}
+                      name="FullName"
+                      label="Full Name*"
                       type="text"
                       submitCount={submitCount}
                       hasFeedback
