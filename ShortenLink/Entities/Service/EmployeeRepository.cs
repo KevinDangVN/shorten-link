@@ -1,4 +1,5 @@
 ﻿using Entities.DBContext;
+using Entities.DTO;
 using Entities.Model;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -42,7 +43,7 @@ namespace Entities.Service
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }        
+        }
 
         public void DeleteEmployee(EmployeeModel emp)
         {
@@ -62,9 +63,17 @@ namespace Entities.Service
             return _context.Employees.Any(emp => emp.Id == empId);
         }
 
-        public IEnumerable<EmployeeModel> GetAllEmployee()
+        public IEnumerable<EmployeeWithRoleNameDTO> GetAllEmployee()
         {
-            return _context.Employees.OrderBy(emp => emp.UserName).ToList();
+            var emp = _context.Employees.Join(_context.RoleModels, e => e.RoleId, r => r.Id, (e, r) => new EmployeeWithRoleNameDTO
+            {
+                Email = e.Email,
+                FullName = e.FullName,
+                Id = e.Id,
+                RoleName = r.RoleName,
+                UserName = e.UserName
+            }).ToList();
+            return emp;
         }
 
         public EmployeeModel GetEmployeeByEmail(string email)
@@ -121,7 +130,7 @@ namespace Entities.Service
 
         public void UpdateEmployee(EmployeeModel emp)
         {
-            
+
         }
     }
 }

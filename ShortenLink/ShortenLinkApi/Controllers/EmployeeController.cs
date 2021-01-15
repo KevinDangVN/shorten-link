@@ -55,7 +55,7 @@ namespace ShortenLinkApi.Controllers
             if (test == "Admin")
             {
                 var empFromRepo = _employeeRepository.GetAllEmployee();
-                return Ok(_mapper.Map<IEnumerable<EmployeeDTO>>(empFromRepo));
+                return Ok(empFromRepo);
             }
             return Unauthorized("You are not authorized!");
 

@@ -11,6 +11,9 @@ namespace Entities.ProfileMapper
         {
             CreateMap<Model.EmployeeModel, DTO.EmployeeDTO>().ReverseMap();
             CreateMap<DTO.EmployeeCreatingDTO, Model.EmployeeModel>();
+            CreateMap<Model.EmployeeModel, DTO.EmployeeForUpdate>();
+            CreateMap<DTO.EmployeeForUpdate, Model.EmployeeModel>();
+            CreateMap<DTO.EmployeeWithRoleNameDTO, Model.EmployeeModel>();
         }
     }
 }

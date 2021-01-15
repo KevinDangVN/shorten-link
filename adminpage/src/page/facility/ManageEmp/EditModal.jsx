@@ -5,7 +5,6 @@ import React, { useEffect, useRef, useState } from "react";
 import * as Yup from "yup";
 
 import CreateAntField from "../../../compoment/Form/CreateAntField/CreateAntField";
-import ImageUpload from "../../../compoment/ImageMultipleUpload/ImageUpload";
 import requestApi from "../../../helper/axios/facilityApi/requestApi";
 
 const EditModal = (props) => {

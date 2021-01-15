@@ -14,7 +14,7 @@ const TableView = (props) => {
 
   const handleDelete = async (record) => {
     try {
-      const response = await manageRequest.deleteLink(record.id);
+      await manageRequest.deleteLink(record.id);
       setIsRerender((pre) => !pre);
     } catch (err) {
       message.error("Something went wrong, please try again!", 5);

@@ -56,12 +56,17 @@ const TableCompoment = (props) => {
             width="25%"
           />
           <Column
-            title="userName"
+            title="UserName"
             dataIndex="fullName"
             key="fullName"
             width="25%"
           />
-          <Column title="Role" dataIndex="role" key="role" width="25%" />
+          <Column
+            title="Role"
+            dataIndex="roleName"
+            key="roleName"
+            width="25%"
+          />
 
           <Column
             title="Action"
