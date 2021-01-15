@@ -71,7 +71,8 @@ namespace Entities.Service
                 FullName = e.FullName,
                 Id = e.Id,
                 RoleName = r.RoleName,
-                UserName = e.UserName
+                UserName = e.UserName,
+                RoleId = e.RoleId
             }).ToList();
             return emp;
         }
