@@ -21,9 +21,9 @@ const requestApi = {
     const url = `/api/employee/${empId}`;
     return axiosClient.delete(url);
   },
-  editRequest: (requestId, formData) => {
-    const url = `/oisp/fm/request/${requestId}`;
-    return axiosClient.put(url, formData);
+  editEmp: (empId, formData) => {
+    const url = `/api/employee/${empId}`;
+    return axiosClient.patch(url, formData);
   },
   getRoleId: () => {
     const url = "/api/employee/getrole";

@@ -20,7 +20,7 @@ const TableCompoment = (props) => {
         message.success("The information was deleted successfully.");
         setIsRerender((pre) => !pre);
       } catch (error) {
-        message.error("Something went wrong.");
+        message.error(error.response.data, 5);
       }
     },
     [setIsRerender]

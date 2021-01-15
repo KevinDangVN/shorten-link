@@ -28,7 +28,7 @@ const ManageEmp = () => {
         });
         setData(dataTable);
       } catch (err) {
-        message.error(err.message, 5);
+        message.error(err.response.data, 5);
       }
     };
     fetchAllEmp();

@@ -50,9 +50,7 @@ namespace ShortenLinkApi.Controllers
         public IActionResult GetAllEmployee()
         {
             var claims = HttpContext.User.Claims;
-            var test = claims.Where(c => c.Type == "Role").FirstOrDefault().Value;
-
-            
+            var test = claims.Where(c => c.Type == "Role").FirstOrDefault().Value;            
 
             if (test == "Admin")
             {
@@ -98,11 +96,26 @@ namespace ShortenLinkApi.Controllers
         }
 
         [HttpDelete("{empId}")]
+        [Authorize]
         public ActionResult DeleteEmpById(Guid empId)
         {
             var empFromRepo = _employeeRepository.GetEmployeeById(empId);
             if (empFromRepo == null)
                 return NotFound();
+
+            var claims = HttpContext.User.Claims;
+            var test = claims.Where(c => c.Type == "EmpId").FirstOrDefault().Value;
+            var testAdmin = claims.Where(c => c.Type == "Role").FirstOrDefault().Value;
+
+            if (empId == Guid.Parse(test))
+            {
+                return BadRequest("You can't delete yourself");
+            }
+
+            if (testAdmin != "Admin")
+            {
+                return Unauthorized("You are not authorized!");
+            }
 
             _employeeRepository.DeleteEmployee(empFromRepo);
             _employeeRepository.Save();
@@ -116,6 +129,14 @@ namespace ShortenLinkApi.Controllers
             var empFromRepo = _employeeRepository.GetEmployeeById(empId);
             if (empFromRepo == null)
                 return NotFound();
+
+            var claims = HttpContext.User.Claims;
+            var test = claims.Where(c => c.Type == "Role").FirstOrDefault().Value;
+
+            if (test != "Admin")
+            {
+                return Unauthorized("You are not authorized!");
+            }
 
             _mapper.Map(emp, empFromRepo);
             _employeeRepository.UpdateEmployee(empFromRepo);

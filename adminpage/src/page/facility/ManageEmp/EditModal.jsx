@@ -24,8 +24,6 @@ const EditModal = (props) => {
     RoleId: record.roleId,
   };
 
-  const [fmBigGroupType, setFmBigGroupType] = useState();
-  const [fmUnit, setFmUnit] = useState([]);
   const [roleArray, setRoleArray] = useState([]);
 
   const formRef = useRef();
@@ -38,11 +36,22 @@ const EditModal = (props) => {
     RoleId: Yup.string().min(1).required("This field is required!"),
   });
 
+  const handleOk = async (ref) => {
+    console.log(ref.current.values);
+    try {
+      const response = await requestApi.editEmp(record.id, ref.current.values);
+      console.log(response);
+      setIsRerender((pre) => !pre);
+      setShowEditModal(false);
+    } catch (error) {
+      console.log(error);
+      message.error(error.response.data, 5);
+    }
+  };
+
   const handleCancel = (e) => {
     setShowEditModal(false);
   };
-
-  const handleOk = async (ref) => {};
 
   useEffect(() => {
     const getRoleNameById = async () => {
@@ -143,12 +152,6 @@ const EditModal = (props) => {
                   />
                 </Col>
               </Row>
-
-              {/* <Row justify="center" style={{ marginTop: "2rem" }}>
-                  <Button type="primary" htmlType="submit" className="border">
-                    Create
-                  </Button>
-                </Row> */}
             </AntdForm>
           );
         }}
